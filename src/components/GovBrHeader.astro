@@ -1,236 +1,540 @@
 ---
 const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+
+// Logo gov.br (PNG oficial em base64, mantida do header gov.br.txt)
+const govbrLogo = "data:image/png;base64,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";
 ---
 
 <header class="br-header" id="br-header">
-  <div class="br-header-top">
-    <div class="br-header-logo">
-      <a href="https://www.gov.br/pt-br" target="_blank" rel="noopener" aria-label="Portal Gov.br">
-        <svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <text x="0" y="18" font-family="sans-serif" font-size="18" font-weight="700" fill="#1351b4">gov</text>
-          <text x="42" y="18" font-family="sans-serif" font-size="18" fill="#1351b4">.br</text>
-        </svg>
-      </a>
-      <span class="br-header-divider" aria-hidden="true"></span>
-      <a href={`${base}/`} class="br-header-title" aria-label="Observatório Nacional da Participação Digital — página inicial">
-        Observatório Nacional da Participação Digital
-      </a>
+  <div class="br-container-lg">
+
+    <!-- Topo: logo gov.br + ações do sistema -->
+    <div class="header-top">
+      <div class="header-logo">
+        <a href="https://www.gov.br/pt-br" target="_blank" rel="noopener" aria-label="Portal Gov.br">
+          <img src={govbrLogo} alt="gov.br" height="42" />
+        </a>
+      </div>
+      <div class="header-actions">
+
+        <!-- Dropdown de idioma -->
+        <div class="language-dropdown-container">
+          <button class="br-button secondary small" type="button" id="lang-btn" aria-expanded="false" aria-controls="lang-menu" aria-label="Selecionar idioma">
+            <span id="selected-language">PT-BR</span>
+            <i class="fas fa-caret-down" aria-hidden="true"></i>
+          </button>
+          <div class="br-list br-list-dropdown" id="lang-menu" hidden>
+            <a href="#" class="br-item" data-lang="pt">PT-BR</a>
+            <a href="#" class="br-item" data-lang="en">EN</a>
+            <a href="#" class="br-item" data-lang="es">ES</a>
+          </div>
+        </div>
+
+        <span class="br-divider vertical" aria-hidden="true"></span>
+
+        <!-- Funções do sistema -->
+        <div class="header-functions dropdown">
+          <button class="br-button circle small" type="button" id="sys-btn" aria-expanded="false" aria-controls="sys-menu" aria-label="Funcionalidades do Sistema">
+            <i class="fas fa-th" aria-hidden="true"></i>
+          </button>
+          <div class="br-list" id="sys-menu" hidden>
+            <div class="header">
+              <div class="title">Funcionalidades do Sistema</div>
+            </div>
+            <div class="br-item">
+              <button class="br-button circle small" type="button" id="contrast-btn" aria-label="Alternar alto contraste">
+                <i class="fas fa-adjust" aria-hidden="true"></i>
+                <span>Alto contraste</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Busca -->
+        <div class="header-search-trigger">
+          <button class="br-button circle" type="button" id="search-trigger" aria-label="Abrir busca" aria-expanded="false" aria-controls="main-searchbox">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <!-- Login -->
+        <div class="header-login">
+          <div class="header-sign-in">
+            <button class="br-sign-in small" type="button">
+              <i class="fas fa-user" aria-hidden="true"></i>
+              <span>Entrar</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
     </div>
 
-    <nav class="br-header-nav" aria-label="Navegação principal">
-      <ul class="br-header-nav-list">
-        <li><a href={`${base}/#sobre`}>Sobre</a></li>
-        <li><a href={`${base}/#mapa`}>Mapa</a></li>
-        <li><a href={`${base}/#linha-do-tempo`}>Linha do tempo</a></li>
-        <li><a href={`${base}/#dados-abertos`}>Dados abertos</a></li>
-        <li><a href={`${base}/#pesquisas`}>Pesquisas</a></li>
-        <li><a href={`${base}/#parceiros`}>Parceiros</a></li>
-        <li>
-          <a href={`${base}/explorar-dados`} class="br-header-nav-cta">
-            Explorar dados
+    <!-- Base: menu + título + busca -->
+    <div class="header-bottom">
+      <div class="header-menu">
+        <div class="header-menu-trigger">
+          <button class="br-button circle small" type="button" id="nav-btn" aria-label="Menu de navegação" aria-expanded="false" aria-controls="main-navigation">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="header-info">
+          <a href={`${base}/`}>
+            <div class="header-title">Observatório Nacional da Participação Digital</div>
           </a>
-        </li>
+        </div>
+      </div>
+
+      <!-- Busca expansível -->
+      <div class="header-search" id="main-searchbox" hidden>
+        <div class="br-input has-icon">
+          <label for="searchbox" class="sr-only">Buscar no site</label>
+          <input id="searchbox" type="search" placeholder="O que você procura?" />
+          <button class="br-button circle small" type="submit" aria-label="Pesquisar">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <button class="br-button circle search-close" type="button" id="search-close" aria-label="Fechar busca">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Navegação principal (mobile: dropdown; desktop: inline) -->
+  <nav class="br-header-nav" id="main-navigation" aria-label="Navegação principal" hidden>
+    <div class="br-container-lg">
+      <ul class="br-header-nav-list">
+        <li><a href={`${base}/#sobre`} class="br-item">Sobre</a></li>
+        <li><a href={`${base}/#mapa`} class="br-item">Mapa</a></li>
+        <li><a href={`${base}/#linha-do-tempo`} class="br-item">Linha do tempo</a></li>
+        <li><a href={`${base}/#dados-abertos`} class="br-item">Dados abertos</a></li>
+        <li><a href={`${base}/#pesquisas`} class="br-item">Pesquisas</a></li>
+        <li><a href={`${base}/#parceiros`} class="br-item">Parceiros</a></li>
+        <li><a href={`${base}/explorar-dados`} class="br-item is-cta">Explorar dados</a></li>
       </ul>
+    </div>
+  </nav>
 
-      <button class="br-header-menu-btn" id="br-menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="br-mobile-menu">
-        <span></span><span></span><span></span>
-      </button>
-    </nav>
-  </div>
-
-  <!-- Menu mobile -->
-  <div class="br-mobile-menu" id="br-mobile-menu" hidden>
-    <ul>
-      <li><a href={`${base}/#sobre`}>Sobre</a></li>
-      <li><a href={`${base}/#mapa`}>Mapa</a></li>
-      <li><a href={`${base}/#linha-do-tempo`}>Linha do tempo</a></li>
-      <li><a href={`${base}/#dados-abertos`}>Dados abertos</a></li>
-      <li><a href={`${base}/#pesquisas`}>Pesquisas</a></li>
-      <li><a href={`${base}/#parceiros`}>Parceiros</a></li>
-      <li><a href={`${base}/explorar-dados`}>Explorar dados</a></li>
-    </ul>
-  </div>
 </header>
 
 <script>
-  const btn = document.getElementById("br-menu-btn");
-  const menu = document.getElementById("br-mobile-menu");
-  btn?.addEventListener("click", () => {
-    const open = menu?.hidden === false;
-    if (menu) menu.hidden = open;
-    btn.setAttribute("aria-expanded", String(!open));
+  // Menu hamburger toggle
+  const navBtn = document.getElementById("nav-btn");
+  const mainNav = document.getElementById("main-navigation");
+  navBtn?.addEventListener("click", () => {
+    const open = !mainNav?.hidden;
+    if (mainNav) mainNav.hidden = open;
+    navBtn.setAttribute("aria-expanded", String(!open));
+    navBtn.querySelector("i")?.classList.toggle("fa-bars", open);
+    navBtn.querySelector("i")?.classList.toggle("fa-times", !open);
+  });
+
+  // Busca toggle
+  const searchTrigger = document.getElementById("search-trigger");
+  const searchBox = document.getElementById("main-searchbox");
+  const searchClose = document.getElementById("search-close");
+  searchTrigger?.addEventListener("click", () => {
+    if (searchBox) searchBox.hidden = false;
+    searchTrigger.setAttribute("aria-expanded", "true");
+    (document.getElementById("searchbox") as HTMLInputElement)?.focus();
+  });
+  searchClose?.addEventListener("click", () => {
+    if (searchBox) searchBox.hidden = true;
+    searchTrigger?.setAttribute("aria-expanded", "false");
+  });
+
+  // Dropdown idioma
+  const langBtn = document.getElementById("lang-btn");
+  const langMenu = document.getElementById("lang-menu");
+  langBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = !langMenu?.hidden;
+    if (langMenu) langMenu.hidden = open;
+    langBtn.setAttribute("aria-expanded", String(!open));
+  });
+
+  // Dropdown sistema
+  const sysBtn = document.getElementById("sys-btn");
+  const sysMenu = document.getElementById("sys-menu");
+  sysBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = !sysMenu?.hidden;
+    if (sysMenu) sysMenu.hidden = open;
+    sysBtn.setAttribute("aria-expanded", String(!open));
+  });
+
+  // Fechar dropdowns ao clicar fora
+  document.addEventListener("click", () => {
+    if (langMenu) langMenu.hidden = true;
+    if (sysMenu) sysMenu.hidden = true;
+    langBtn?.setAttribute("aria-expanded", "false");
+    sysBtn?.setAttribute("aria-expanded", "false");
+  });
+
+  // Alto contraste
+  document.getElementById("contrast-btn")?.addEventListener("click", () => {
+    document.documentElement.classList.toggle("high-contrast");
   });
 </script>
 
 <style>
+  /* =============================================
+     DSGOV — Cabeçalho (padrão mínimo gov.br)
+     Paleta: Blue Warm  •  Font: Rawline/Raleway
+     ============================================= */
+
   .br-header {
-    background: #071d41;
-    border-bottom: 4px solid #1351b4;
+    background: var(--dsgov-blue-90, #071D41);
     position: sticky;
     top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    z-index: 200;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
   }
 
-  .br-header-top {
+  .br-container-lg {
     max-width: 1280px;
     margin: 0 auto;
-    padding: 0 var(--gutter, 1.5rem);
+    padding: 0 1.5rem;
+  }
+
+  /* Topo */
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .header-logo img {
+    height: 42px;
+    width: auto;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Base */
+  .header-bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    height: 64px;
+    padding: 0.625rem 0;
   }
 
-  .br-header-logo {
+  .header-menu {
     display: flex;
     align-items: center;
-    gap: 1rem;
-    flex-shrink: 0;
+    gap: 0.75rem;
   }
 
-  .br-header-logo a:first-child {
-    display: flex;
+  .header-title {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  .header-info a {
+    text-decoration: none;
+  }
+
+  /* Botões DSGOV */
+  .br-button {
+    display: inline-flex;
     align-items: center;
-  }
-
-  .br-header-divider {
-    width: 1px;
-    height: 28px;
-    background: rgba(255,255,255,0.3);
-    flex-shrink: 0;
-  }
-
-  .br-header-title {
+    justify-content: center;
+    gap: 0.375rem;
+    font-family: var(--font-sans);
     font-size: 0.875rem;
     font-weight: 600;
+    border: none;
+    cursor: pointer;
+    border-radius: 100rem;
+    padding: 0.5rem 1rem;
+    transition: background 150ms, color 150ms, box-shadow 150ms;
+    background: transparent;
     color: #fff;
+  }
+
+  .br-button.circle {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .br-button.circle:hover,
+  .br-button.circle:focus-visible {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    outline: 2px solid rgba(255,255,255,0.3);
+    outline-offset: 2px;
+  }
+
+  .br-button.secondary {
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 4px;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .br-button.secondary:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+
+  .br-button.small {
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.75rem;
+  }
+
+  .br-button.circle.small {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Sign-in */
+  .br-sign-in {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.875rem;
+    background: #1351B4;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 100rem;
+    cursor: pointer;
+    transition: background 150ms;
+  }
+
+  .br-sign-in:hover {
+    background: #2670E8;
+  }
+
+  .br-sign-in.small {
+    font-size: 0.8125rem;
+    padding: 0.3125rem 0.75rem;
+  }
+
+  /* Divider vertical */
+  .br-divider.vertical {
+    display: inline-block;
+    width: 1px;
+    height: 24px;
+    background: rgba(255,255,255,0.25);
+    margin: 0 0.25rem;
+  }
+
+  /* Dropdowns */
+  .language-dropdown-container,
+  .header-functions {
+    position: relative;
+  }
+
+  .br-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 160px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    z-index: 300;
+    overflow: hidden;
+  }
+
+  .br-list .header {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f8f8f8;
+  }
+
+  .br-list .title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .br-item {
+    display: block;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    color: #333;
     text-decoration: none;
-    line-height: 1.3;
-    max-width: 280px;
+    cursor: pointer;
+    transition: background 100ms;
   }
 
-  .br-header-title:hover {
-    text-decoration: underline;
+  .br-item:hover {
+    background: #f0f4fc;
+    color: #1351B4;
   }
 
-  /* Nav */
-  .br-header-nav {
+  .br-list .br-item button {
+    background: none;
+    border: none;
+    cursor: pointer;
     display: flex;
     align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #333;
+    padding: 0;
+    width: 100%;
+  }
+
+  .br-list .br-item button:hover {
+    color: #1351B4;
+  }
+
+  /* Busca expansível */
+  .header-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    max-width: 440px;
+  }
+
+  .br-input {
+    position: relative;
+    flex: 1;
+  }
+
+  .br-input input {
+    width: 100%;
+    padding: 0.5rem 2.5rem 0.5rem 0.875rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 100rem;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    outline: none;
+    transition: border-color 150ms, background 150ms;
+  }
+
+  .br-input input::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .br-input input:focus {
+    border-color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.15);
+  }
+
+  .br-input.has-icon button {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Navegação principal */
+  .br-header-nav {
+    background: #0C326F;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .br-header-nav .br-container-lg {
+    padding: 0 1.5rem;
   }
 
   .br-header-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 0.25rem;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
   }
 
-  .br-header-nav-list a {
-    display: block;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.875rem;
-    color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    border-radius: 4px;
-    transition: background 150ms ease, color 150ms ease;
-    white-space: nowrap;
-  }
-
-  .br-header-nav-list a:hover {
-    background: rgba(255,255,255,0.1);
-    color: #fff;
-  }
-
-  .br-header-nav-cta {
-    background: #1351b4 !important;
-    color: #fff !important;
-    border-radius: 4px;
-    font-weight: 600 !important;
-  }
-
-  .br-header-nav-cta:hover {
-    background: #2670e8 !important;
-  }
-
-  /* Hamburger */
-  .br-header-menu-btn {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 40px;
-    height: 40px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 4px;
-  }
-
-  .br-header-menu-btn span {
-    display: block;
-    width: 100%;
-    height: 2px;
-    background: #fff;
-    border-radius: 2px;
-    transition: transform 200ms ease, opacity 200ms ease;
-  }
-
-  .br-header-menu-btn:hover {
-    background: rgba(255,255,255,0.1);
-  }
-
-  /* Mobile menu */
-  .br-mobile-menu {
-    background: #071d41;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    padding: 0.5rem 0;
-  }
-
-  .br-mobile-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    max-width: 1280px;
-    margin: 0 auto;
-  }
-
-  .br-mobile-menu a {
-    display: block;
-    padding: 0.75rem var(--gutter, 1.5rem);
+  .br-header-nav-list .br-item {
+    padding: 0.75rem 1rem;
     font-size: 0.9375rem;
+    font-weight: 500;
     color: rgba(255,255,255,0.85);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-    transition: background 150ms ease;
+    border-radius: 0;
+    white-space: nowrap;
+    transition: background 150ms, color 150ms;
   }
 
-  .br-mobile-menu a:hover {
+  .br-header-nav-list .br-item:hover {
     background: rgba(255,255,255,0.08);
     color: #fff;
   }
 
-  @media (max-width: 1024px) {
-    .br-header-nav-list {
+  .br-header-nav-list .br-item.is-cta {
+    background: #1351B4;
+    color: #fff;
+    font-weight: 700;
+    margin-left: auto;
+    border-radius: 0;
+  }
+
+  .br-header-nav-list .br-item.is-cta:hover {
+    background: #2670E8;
+  }
+
+  /* === Desktop: mostrar nav inline; esconder hamburger === */
+  @media (min-width: 1025px) {
+    #nav-btn {
       display: none;
     }
-    .br-header-menu-btn {
-      display: flex;
+    .br-header-nav {
+      display: block !important;
     }
-    .br-header-title {
-      font-size: 0.8125rem;
-      max-width: 200px;
+    /* Sobrescrever o hidden aplicado pelo JS no desktop */
+  }
+
+  /* === Mobile === */
+  @media (max-width: 1024px) {
+    .header-title {
+      font-size: 0.875rem;
+    }
+    .br-header-nav-list {
+      flex-direction: column;
+    }
+    .br-header-nav-list .br-item.is-cta {
+      margin-left: 0;
     }
   }
 
-  @media (max-width: 480px) {
-    .br-header-title {
+  @media (max-width: 640px) {
+    .header-title {
+      display: none;
+    }
+    .language-dropdown-container {
       display: none;
     }
   }
 </style>
+
+<script>
+  /* No desktop, garantir que a nav fique sempre visível */
+  function applyDesktopNav() {
+    const nav = document.getElementById("main-navigation");
+    if (!nav) return;
+    if (window.innerWidth >= 1025) {
+      nav.hidden = false;
+    }
+  }
+  applyDesktopNav();
+  window.addEventListener("resize", applyDesktopNav);
+</script>
