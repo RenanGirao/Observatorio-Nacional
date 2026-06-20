@@ -9,9 +9,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     <div class="br-container-lg">
       <div class="logos-inner">
         <a href="https://www.gov.br/pt-br" target="_blank" rel="noopener" aria-label="Portal Gov.br">
-          <svg width="72" height="14" viewBox="0 0 72 14" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <text x="0" y="13" font-family="Rawline, Raleway, sans-serif" font-size="13" font-weight="700" fill="rgba(255,255,255,0.75)">gov.br</text>
-          </svg>
+          <img src={`${base}/govbr-logo.png`} alt="gov.br" class="govbr-logo-img" height="28" />
         </a>
         <span class="br-divider-v" aria-hidden="true"></span>
         <a href={`${base}/`} class="footer-system-name" aria-label="Observatório Nacional da Participação Digital">
@@ -70,6 +68,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
   <div class="br-footer-bottom">
     <div class="br-container-lg">
       <div class="bottom-inner">
+        <a href="https://www.gov.br/pt-br" target="_blank" rel="noopener" aria-label="Portal Gov.br">
+          <img src={`${base}/govbr-logo.png`} alt="gov.br" class="govbr-logo-bottom" height="20" />
+        </a>
         <p class="footer-license">
           <i class="fas fa-lock-open" aria-hidden="true"></i>
           Conteúdo sob
@@ -100,6 +101,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 1.5rem;
+  }
+
+  /* Logo gov.br — filtro para branco sobre fundo escuro */
+  .govbr-logo-img {
+    height: 28px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.85;
+    transition: opacity 150ms;
+  }
+
+  .govbr-logo-img:hover {
+    opacity: 1;
   }
 
   /* Bloco de logos */
@@ -139,8 +153,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
 
   /* Navegação */
   .br-footer-nav {
-    background: #0C326F;
+    background: #071D41;
     padding: 2.5rem 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
   }
 
   .footer-nav-list {
@@ -211,6 +226,14 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, "");
     justify-content: space-between;
     gap: 1rem;
     flex-wrap: wrap;
+  }
+
+  .govbr-logo-bottom {
+    height: 20px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.55;
+    flex-shrink: 0;
   }
 
   .footer-license,
