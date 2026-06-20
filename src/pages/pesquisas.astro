@@ -1,0 +1,1201 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Section from "../components/Section.astro";
+import Footer from "../components/Footer.astro";
+
+const title = "Pesquisas e publicações";
+const description =
+  "Documentos, relatórios, bases para download e materiais complementares dos processos de participação social. Conheça também as fontes de dados abertos que alimentam o Observatório — do Hub de Participação Digital ao Portal Brasileiro de Dados Abertos.";
+
+const tiposDocumento = [
+  { value: "relatorio", label: "Relatório", color: "var(--color-ana-left-80)" },
+  { value: "anexo", label: "Anexo", color: "var(--color-primary-80)" },
+  { value: "dataset", label: "Dataset", color: "var(--color-tri-right-80)" },
+  { value: "documento-tecnico", label: "Documento técnico", color: "var(--color-ana-right-80)" },
+  { value: "documento-normativo", label: "Documento normativo", color: "var(--color-split-left-80)" },
+  { value: "apresentacao", label: "Apresentação", color: "var(--color-comp-80)" },
+  { value: "ata-registro", label: "Ata/Registro", color: "var(--color-primary-60)" },
+  { value: "material-apoio", label: "Material de apoio", color: "var(--color-split-right-80)" },
+];
+
+const orgaos = [
+  "Ministério do Planejamento e Orçamento",
+  "Ministério da Saúde",
+  "Secretaria-Geral da Presidência",
+  "Ministério da Justiça e Segurança Pública",
+  "Controladoria-Geral da União",
+];
+
+const formatos = ["PDF", "CSV", "XLSX", "ODS", "DOCX", "HTML"];
+
+const processos = [
+  {
+    id: "ppa-2024",
+    nome: "Plano Plurianual Participativo 2024–2027",
+    periodo: "2023 – 2024",
+    tema: "Orçamento público",
+  },
+  {
+    id: "marco-civil",
+    nome: "Consulta pública Marco Civil da Internet",
+    periodo: "2023",
+    tema: "Direitos digitais",
+  },
+  {
+    id: "saude-digital",
+    nome: "Conferência Nacional de Saúde Digital",
+    periodo: "2024",
+    tema: "Saúde pública",
+  },
+  {
+    id: "governo-digital",
+    nome: "Estratégia Brasileira de Governo Digital",
+    periodo: "2023 – 2024",
+    tema: "Transformação digital",
+  },
+];
+
+const documentos = [
+  {
+    id: 1,
+    titulo: "Relatório final — Plano Plurianual Participativo 2024–2027",
+    tipo: "relatorio",
+    processoId: "ppa-2024",
+    data: "2024-06-15",
+    descricao:
+      "Consolidação das propostas recebidas, análises temáticas e diretrizes aprovadas para o quadriênio.",
+    formato: "PDF",
+    tamanho: "2.4 MB",
+    orgao: "Ministério do Planejamento e Orçamento",
+  },
+  {
+    id: 2,
+    titulo: "Propostas por estado — PPA Participativo 2024–2027",
+    tipo: "dataset",
+    processoId: "ppa-2024",
+    data: "2024-05-20",
+    descricao:
+      "Base com propostas submetidas, agregadas por UF, tema e eixo estratégico do plano.",
+    formato: "CSV",
+    tamanho: "8.1 MB",
+    orgao: "Ministério do Planejamento e Orçamento",
+  },
+  {
+    id: 3,
+    titulo: "Anexos técnicos — PPA Participativo",
+    tipo: "anexo",
+    processoId: "ppa-2024",
+    data: "2024-04-10",
+    descricao:
+      "Notas metodológicas, questionários aplicados e pareceres dos comitês temáticos.",
+    formato: "PDF",
+    tamanho: "5.7 MB",
+    orgao: "Ministério do Planejamento e Orçamento",
+  },
+  {
+    id: 4,
+    titulo: "Ata da audiência pública — Marco Civil da Internet",
+    tipo: "ata-registro",
+    processoId: "marco-civil",
+    data: "2023-10-05",
+    descricao:
+      "Registro integral da audiência pública realizada em Brasília com participação presencial e remota.",
+    formato: "PDF",
+    tamanho: "1.2 MB",
+    orgao: "Ministério da Justiça e Segurança Pública",
+  },
+  {
+    id: 5,
+    titulo: "Nota técnica — Neutralidade de rede e proteção de dados",
+    tipo: "documento-tecnico",
+    processoId: "marco-civil",
+    data: "2023-09-18",
+    descricao:
+      "Análise jurídica e técnica sobre impacto regulatório, comparativo internacional e recomendações.",
+    formato: "PDF",
+    tamanho: "1.8 MB",
+    orgao: "Ministério da Justiça e Segurança Pública",
+  },
+  {
+    id: 6,
+    titulo: "Resultados — Conferência Nacional de Saúde Digital",
+    tipo: "relatorio",
+    processoId: "saude-digital",
+    data: "2024-11-30",
+    descricao:
+      "Relatório final com diretrizes aprovadas, moções e propostas priorizadas pelos delegados.",
+    formato: "PDF",
+    tamanho: "4.2 MB",
+    orgao: "Ministério da Saúde",
+  },
+  {
+    id: 7,
+    titulo: "Indicadores de saúde digital por município",
+    tipo: "dataset",
+    processoId: "saude-digital",
+    data: "2024-10-12",
+    descricao:
+      "Planilha com indicadores de infraestrutura, acesso e resultados em saúde digital por município.",
+    formato: "XLSX",
+    tamanho: "3.5 MB",
+    orgao: "Ministério da Saúde",
+  },
+  {
+    id: 8,
+    titulo: "Apresentação institucional — Conferência de Saúde Digital",
+    tipo: "apresentacao",
+    processoId: "saude-digital",
+    data: "2024-09-01",
+    descricao:
+      "Slides apresentados na abertura da conferência, com dados, metas e contextualização.",
+    formato: "PDF",
+    tamanho: "6.3 MB",
+    orgao: "Ministério da Saúde",
+  },
+  {
+    id: 9,
+    titulo: "Decreto nº 12.345 — Estratégia Brasileira de Governo Digital",
+    tipo: "documento-normativo",
+    processoId: "governo-digital",
+    data: "2024-03-22",
+    descricao:
+      "Texto integral do decreto que institui a estratégia, seus princípios, objetivos e governança.",
+    formato: "PDF",
+    tamanho: "0.8 MB",
+    orgao: "Secretaria-Geral da Presidência",
+  },
+  {
+    id: 10,
+    titulo: "Guia de boas práticas em governo digital",
+    tipo: "material-apoio",
+    processoId: "governo-digital",
+    data: "2024-05-10",
+    descricao:
+      "Material de referência com casos de sucesso, recomendações e ferramentas para gestores públicos.",
+    formato: "PDF",
+    tamanho: "2.1 MB",
+    orgao: "Secretaria-Geral da Presidência",
+  },
+  {
+    id: 11,
+    titulo: "Participação social digital — mapeamento de plataformas",
+    tipo: "documento-tecnico",
+    processoId: "governo-digital",
+    data: "2024-02-15",
+    descricao:
+      "Estudo comparativo de plataformas de participação utilizadas no Brasil e experiências internacionais.",
+    formato: "PDF",
+    tamanho: "3.9 MB",
+    orgao: "Controladoria-Geral da União",
+  },
+  {
+    id: 12,
+    titulo: "Dados brutos de participação — PPA 2024–2027",
+    tipo: "dataset",
+    processoId: "ppa-2024",
+    data: "2024-07-01",
+    descricao:
+      "Export completo dos dados de participação: votos, comentários, propostas e metadados.",
+    formato: "CSV",
+    tamanho: "15.3 MB",
+    orgao: "Ministério do Planejamento e Orçamento",
+  },
+];
+
+const catalogos = [
+  {
+    nome: "Hub de Participação Digital",
+    tipo: "API de dados",
+    descricao:
+      "Plataforma de ingestão, validação e consulta de registros de participação social — incluindo propostas, votações e comentários de processos participativos digitais. Os documentos listados nesta página são derivados dos processos armazenados no Hub.",
+    url: "#",
+    datasets: "128 processos",
+  },
+  {
+    nome: "Portal Brasileiro de Dados Abertos",
+    tipo: "Portal de dados abertos",
+    descricao:
+      "Catálogo central do governo federal que reúne milhares de conjuntos de dados de órgãos públicos — incluindo participação social, orçamento público, transparência e políticas setoriais.",
+    url: "https://dados.gov.br",
+    datasets: "10.000+ conjuntos",
+  },
+];
+
+function formatDate(iso: string) {
+  const [y, m, d] = iso.split("-");
+  return `${d}/${m}/${y}`;
+}
+---
+
+<Layout title={title} description={description}>
+  <Header />
+
+  <main id="conteudo-principal">
+    <!-- ===== BANNER ===== -->
+    <section class="banner" aria-label="Pesquisas e publicações">
+      <div class="banner-inner">
+        <h1 class="banner-title">Pesquisas e publicações</h1>
+        <p class="text-body-lg banner-subtitle">
+          Documentos, relatórios, bases para download e materiais complementares
+          dos processos de participação social digital. Os dados brutos de cada
+          processo são recebidos, validados e armazenados pelo Hub de
+          Participação Digital — acessível via API pública.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== FILTROS ===== -->
+    <Section ariaLabel="Filtros de busca">
+      <div class="filters-bar">
+        <div class="filter-search">
+          <label for="filter-keyword" class="sr-only">Buscar por palavra-chave</label>
+          <input
+            type="search"
+            id="filter-keyword"
+            class="filter-input filter-input--search"
+            placeholder="Buscar por palavra-chave…"
+          />
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-processo" class="filter-label">Processo</label>
+          <select id="filter-processo" class="filter-input">
+            <option value="">Todos os processos</option>
+            {processos.map((p) => (
+              <option value={p.id}>{p.nome}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-tipo" class="filter-label">Tipo</label>
+          <select id="filter-tipo" class="filter-input">
+            <option value="">Todos os tipos</option>
+            {tiposDocumento.map((t) => (
+              <option value={t.value}>{t.label}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-orgao" class="filter-label">Órgão</label>
+          <select id="filter-orgao" class="filter-input">
+            <option value="">Todos os órgãos</option>
+            {orgaos.map((o) => (
+              <option value={o}>{o}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-formato" class="filter-label">Formato</label>
+          <select id="filter-formato" class="filter-input">
+            <option value="">Todos os formatos</option>
+            {formatos.map((f) => (
+              <option value={f}>{f}</option>
+            ))}
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="filter-data" class="filter-label">Ano</label>
+          <select id="filter-data" class="filter-input">
+            <option value="">Todos os anos</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+          </select>
+        </div>
+      </div>
+
+      <div
+        id="filter-results-announce"
+        class="sr-only"
+        aria-live="polite"
+        aria-atomic="true"
+      ></div>
+    </Section>
+
+    <!-- ===== DOCUMENTOS POR PROCESSO ===== -->
+    <Section ariaLabel="Documentos organizados por processo">
+      <div id="documents-region">
+        {processos.map((proc) => {
+          const docs = documentos.filter((d) => d.processoId === proc.id);
+          return (
+            <details class="process-group" id={`processo-${proc.id}`}>
+              <summary class="process-summary">
+                <div class="process-info">
+                  <h3 class="process-name">{proc.nome}</h3>
+                  <div class="process-meta">
+                    <span class="process-periodo">{proc.periodo}</span>
+                    <span class="process-tema">{proc.tema}</span>
+                    <span class="process-count">{docs.length} documento{docs.length !== 1 ? "s" : ""}</span>
+                  </div>
+                </div>
+                <svg
+                  class="process-chevron"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </summary>
+
+              <div class="process-documents">
+                {docs.map((doc) => (
+                  <div class="document-card" data-doc-id={doc.id}>
+                    <div class="doc-select">
+                      <input
+                        type="checkbox"
+                        id={`doc-${doc.id}`}
+                        class="doc-checkbox"
+                        aria-label={`Selecionar ${doc.titulo}`}
+                        value={doc.id}
+                      />
+                    </div>
+
+                    <div class="doc-body">
+                      <div class="doc-header">
+                        <h4 class="doc-title">{doc.titulo}</h4>
+                        <span
+                          class="doc-type-badge"
+                          style={`background: ${tiposDocumento.find((t) => t.value === doc.tipo)?.color ?? "var(--color-primary-80)"}18; color: ${tiposDocumento.find((t) => t.value === doc.tipo)?.color ?? "var(--color-primary-80)"}; border: 1px solid ${tiposDocumento.find((t) => t.value === doc.tipo)?.color ?? "var(--color-primary-80)"}30`}
+                        >
+                          {tiposDocumento.find((t) => t.value === doc.tipo)?.label ?? doc.tipo}
+                        </span>
+                      </div>
+
+                      <p class="doc-description">{doc.descricao}</p>
+
+                      <div class="doc-meta">
+                        <span class="doc-meta-item">
+                          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                            <rect x="1" y="2" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.2" />
+                            <path d="M1 5h12M4 1v2M10 1v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" />
+                          </svg>
+                          {formatDate(doc.data)}
+                        </span>
+                        <span class="doc-meta-item">{doc.orgao}</span>
+                        <span class="doc-meta-item">{doc.formato}</span>
+                        <span class="doc-meta-item">{doc.tamanho}</span>
+                      </div>
+                    </div>
+
+                    <div class="doc-actions">
+                      <a
+                        href="#"
+                        class="doc-download-btn"
+                        download
+                        aria-label={`Baixar ${doc.titulo} (${doc.formato}, ${doc.tamanho})`}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                          <path d="M8 1v9M4 7l4 4 4-4M2 12v1.5A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        <span>PDF</span>
+                      </a>
+                      <button
+                        class="doc-copy-link"
+                        aria-label={`Copiar link de ${doc.titulo}`}
+                        data-link={`/pesquisas#doc-${doc.id}`}
+                      >
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                          <path d="M5.5 4.5h-1a2 2 0 000 4h1m4-4h1a2 2 0 010 4h-1m-4-2h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </details>
+          );
+        })}
+      </div>
+
+      <p id="no-results-message" class="no-results" hidden>
+        Nenhum documento encontrado com os filtros atuais. Tente ajustar os critérios de busca.
+      </p>
+    </Section>
+
+    <!-- ===== DOWNLOAD BAR ===== -->
+    <div class="download-bar" id="download-bar" hidden>
+      <div class="download-bar-inner">
+        <span class="download-bar-count" id="download-count">
+          0 documentos selecionados
+        </span>
+        <div class="download-bar-actions">
+          <button class="download-bar-deselect" id="deselect-all">
+            Limpar seleção
+          </button>
+          <button class="download-bar-cta" id="download-selected">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M8 1v9M4 7l4 4 4-4M2 12v1.5A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Baixar selecionados (ZIP)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== FONTES DE DADOS ABERTOS ===== -->
+    <Section ariaLabel="Fontes de dados abertos">
+      <h2>Fontes de dados abertos</h2>
+      <p class="text-body-lg section-intro">
+        Os documentos e publicações listados nesta página estão vinculados a
+        processos de participação social cujos dados são armazenados e
+        disponibilizados via API. Conheça abaixo as fontes que alimentam o
+        Observatório — do pipeline de ingestão de registros de participação ao
+        ecossistema federal de dados abertos.
+      </p>
+
+      <div class="catalogs-grid">
+        {catalogos.map((cat) => (
+          <div class="catalog-card">
+            <div class="catalog-header">
+              <h3 class="catalog-name">{cat.nome}</h3>
+              <span class="catalog-type-badge">{cat.tipo}</span>
+            </div>
+            <p class="catalog-description">{cat.descricao}</p>
+            <div class="catalog-footer">
+              <span class="catalog-datasets">{cat.datasets} conjuntos de dados</span>
+              <a
+                href={cat.url}
+                class="catalog-link"
+                target="_blank"
+                rel="noopener"
+              >
+                Acessar catálogo
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                  <path d="M6 4h6v6M12 4L3 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </Section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  // ===== FILTROS =====
+  const filterKeyword = document.getElementById("filter-keyword") as HTMLInputElement;
+  const filterProcesso = document.getElementById("filter-processo") as HTMLSelectElement;
+  const filterTipo = document.getElementById("filter-tipo") as HTMLSelectElement;
+  const filterOrgao = document.getElementById("filter-orgao") as HTMLSelectElement;
+  const filterFormato = document.getElementById("filter-formato") as HTMLSelectElement;
+  const filterData = document.getElementById("filter-data") as HTMLSelectElement;
+  const announce = document.getElementById("filter-results-announce")!;
+  const noResults = document.getElementById("no-results-message")!;
+  const documentsRegion = document.getElementById("documents-region")!;
+
+  function getFilterState() {
+    return {
+      keyword: filterKeyword?.value.trim().toLowerCase() ?? "",
+      processo: filterProcesso?.value ?? "",
+      tipo: filterTipo?.value ?? "",
+      orgao: filterOrgao?.value ?? "",
+      formato: filterFormato?.value ?? "",
+      ano: filterData?.value ?? "",
+    };
+  }
+
+  function applyFilters() {
+    const { keyword, processo, tipo, orgao, formato, ano } = getFilterState();
+    const processGroups = documentsRegion.querySelectorAll<HTMLDetailsElement>(".process-group");
+    let totalVisible = 0;
+
+    processGroups.forEach((group) => {
+      const cards = group.querySelectorAll<HTMLElement>(".document-card");
+      let groupVisible = 0;
+
+      cards.forEach((card) => {
+        const docId = card.dataset.docId;
+        const titleEl = card.querySelector(".doc-title");
+        const title = titleEl?.textContent?.toLowerCase() ?? "";
+        const descEl = card.querySelector(".doc-description");
+        const description = descEl?.textContent?.toLowerCase() ?? "";
+        const metaItems = card.querySelectorAll(".doc-meta-item");
+        const metaText = Array.from(metaItems)
+          .map((el) => el.textContent?.toLowerCase() ?? "")
+          .join(" ");
+        const searchText = `${title} ${description} ${metaText}`;
+
+        const matchesKeyword =
+          !keyword || searchText.includes(keyword);
+        const matchesTipo =
+          !tipo || card.querySelector(`.doc-type-badge`)?.textContent?.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '') ===
+            tipo;
+        // Use data attributes for more precise matching
+        const matchesProcessoViaGroup =
+          !processo || group.id === `processo-${processo}`;
+        const matchesOrgao =
+          !orgao || metaText.includes(orgao.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''));
+        const matchesFormato =
+          !formato || metaText.includes(formato.toLowerCase());
+        const matchesAno =
+          !ano || metaText.includes(ano);
+
+        const visible =
+          matchesKeyword &&
+          matchesTipo &&
+          matchesProcessoViaGroup &&
+          matchesOrgao &&
+          matchesFormato &&
+          matchesAno;
+
+        card.hidden = !visible;
+        if (visible) groupVisible++;
+      });
+
+      group.hidden = groupVisible === 0;
+      totalVisible += groupVisible;
+    });
+
+    noResults.hidden = totalVisible > 0;
+    announce.textContent = `${totalVisible} documento${totalVisible !== 1 ? "s" : ""} encontrado${totalVisible !== 1 ? "s" : ""}`;
+  }
+
+  [filterKeyword, filterProcesso, filterTipo, filterOrgao, filterFormato, filterData].forEach((el) => {
+    el?.addEventListener("input", applyFilters);
+    el?.addEventListener("change", applyFilters);
+  });
+
+  // ===== SELEÇÃO E DOWNLOAD BAR =====
+  const downloadBar = document.getElementById("download-bar")!;
+  const downloadCount = document.getElementById("download-count")!;
+  const deselectAllBtn = document.getElementById("deselect-all")!;
+  const downloadSelectedBtn = document.getElementById("download-selected")!;
+
+  function updateDownloadBar() {
+    const checked = documentsRegion.querySelectorAll<HTMLInputElement>(".doc-checkbox:checked");
+    const count = checked.length;
+
+    if (count > 0) {
+      downloadBar.hidden = false;
+      downloadCount.textContent = `${count} documento${count !== 1 ? "s" : ""} selecionado${count !== 1 ? "s" : ""}`;
+    } else {
+      downloadBar.hidden = true;
+    }
+  }
+
+  documentsRegion.addEventListener("change", (e) => {
+    if ((e.target as HTMLElement).classList.contains("doc-checkbox")) {
+      updateDownloadBar();
+    }
+  });
+
+  deselectAllBtn.addEventListener("click", () => {
+    documentsRegion
+      .querySelectorAll<HTMLInputElement>(".doc-checkbox:checked")
+      .forEach((cb) => (cb.checked = false));
+    updateDownloadBar();
+  });
+
+  downloadSelectedBtn.addEventListener("click", () => {
+    const checked = documentsRegion.querySelectorAll<HTMLInputElement>(".doc-checkbox:checked");
+    if (checked.length === 0) return;
+    const ids = Array.from(checked).map((cb) => cb.value).join(", ");
+    alert(`Simulação de download ZIP — ${checked.length} documento(s) selecionado(s): IDs ${ids}`);
+  });
+
+  // ===== COPIAR LINK =====
+  documentsRegion.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest(".doc-copy-link") as HTMLElement | null;
+    if (!btn) return;
+    const link = btn.dataset.link;
+    if (!link) return;
+    const fullUrl = `${window.location.origin}${link}`;
+    navigator.clipboard.writeText(fullUrl).then(() => {
+      const originalLabel = btn.getAttribute("aria-label") ?? "";
+      btn.setAttribute("aria-label", "Link copiado!");
+      setTimeout(() => btn.setAttribute("aria-label", originalLabel), 2000);
+    }).catch(() => {
+      // Fallback for older browsers
+      alert(`Link: ${fullUrl}`);
+    });
+  });
+</script>
+
+<style>
+  /* ===== BANNER ===== */
+  .banner {
+    background: var(--color-primary-10);
+    color: var(--color-on-primary);
+    padding: var(--space-3xl) var(--gutter);
+  }
+
+  .banner-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .banner-title {
+    color: var(--color-on-primary);
+    margin-bottom: var(--space-md);
+  }
+
+  .banner-subtitle {
+    color: var(--color-primary-80);
+    max-width: 720px;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .banner {
+      padding: var(--space-2xl) var(--space-md);
+    }
+
+    .banner-subtitle {
+      font-size: var(--text-body-md-size);
+    }
+  }
+
+  /* ===== FILTERS ===== */
+  .filters-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    align-items: flex-end;
+  }
+
+  .filter-search {
+    flex: 1 1 260px;
+    min-width: 200px;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    flex: 1 1 160px;
+    min-width: 140px;
+  }
+
+  .filter-label {
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    letter-spacing: var(--text-label-sm-spacing);
+    color: var(--color-muted);
+    text-transform: uppercase;
+  }
+
+  .filter-input {
+    background: var(--color-surface);
+    color: var(--color-foreground);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 10px 14px;
+    font-family: var(--font-sans);
+    font-size: var(--text-body-md-size);
+    line-height: var(--text-body-md-leading);
+    min-height: 44px;
+    transition: border-color 200ms ease;
+  }
+
+  .filter-input:focus {
+    border-color: var(--color-primary);
+    outline: 2px solid var(--color-primary-60);
+    outline-offset: 2px;
+  }
+
+  .filter-input--search {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none'%3E%3Ccircle cx='8' cy='8' r='5' stroke='%236b7280' stroke-width='1.5'/%3E%3Cpath d='M12 12 16 16' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 12px center;
+    padding-left: 40px;
+  }
+
+  @media (max-width: 640px) {
+    .filters-bar {
+      flex-direction: column;
+    }
+
+    .filter-search,
+    .filter-group {
+      flex: 1 1 auto;
+      width: 100%;
+    }
+  }
+
+  /* ===== PROCESS GROUPS (<details>/<summary>) ===== */
+  .process-group {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-md);
+    overflow: hidden;
+  }
+
+  .process-group[open] {
+    border-color: var(--color-primary-80);
+  }
+
+  .process-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-lg);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  .process-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .process-summary:hover {
+    background: var(--color-primary-95);
+  }
+
+  .process-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .process-name {
+    font-size: var(--text-h3-size);
+    font-weight: var(--text-h3-weight);
+    line-height: var(--text-h3-leading);
+    color: var(--color-foreground);
+    margin: 0 0 var(--space-xs);
+  }
+
+  .process-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .process-periodo,
+  .process-tema {
+    font-size: var(--text-body-sm-size);
+    color: var(--color-muted);
+  }
+
+  .process-tema::before {
+    content: "•";
+    margin: 0 var(--space-xs);
+  }
+
+  .process-count {
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    letter-spacing: var(--text-label-sm-spacing);
+    color: var(--color-primary);
+    background: var(--color-primary-95);
+    border-radius: var(--radius-full);
+    padding: 2px 10px;
+    margin-left: var(--space-sm);
+  }
+
+  .process-chevron {
+    flex-shrink: 0;
+    color: var(--color-muted);
+    transition: transform 200ms ease;
+  }
+
+  .process-group[open] .process-chevron {
+    transform: rotate(180deg);
+    color: var(--color-primary);
+  }
+
+  .process-documents {
+    border-top: 1px solid var(--color-border);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 640px) {
+    .process-summary {
+      padding: var(--space-md);
+    }
+
+    .process-name {
+      font-size: 18px;
+    }
+
+    .process-documents {
+      padding: var(--space-sm);
+      gap: var(--space-sm);
+    }
+  }
+
+  /* ===== DOCUMENT CARD ===== */
+  .document-card {
+    display: flex;
+    gap: var(--space-md);
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-md);
+    transition: border-color 200ms ease;
+  }
+
+  .document-card:hover {
+    border-color: var(--color-primary-80);
+  }
+
+  .doc-select {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .doc-checkbox {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+  }
+
+  .doc-body {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .doc-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xs);
+  }
+
+  .doc-title {
+    font-size: var(--text-body-md-size);
+    font-weight: 600;
+    line-height: var(--text-body-md-leading);
+    color: var(--color-foreground);
+    margin: 0;
+  }
+
+  .doc-type-badge {
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    letter-spacing: var(--text-label-sm-spacing);
+    border-radius: var(--radius-full);
+    padding: 2px 10px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .doc-description {
+    font-size: var(--text-body-sm-size);
+    line-height: var(--text-body-sm-leading);
+    color: var(--color-muted);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .doc-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm) var(--space-md);
+    align-items: center;
+  }
+
+  .doc-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-body-sm-size);
+    color: var(--color-muted);
+  }
+
+  .doc-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    flex-shrink: 0;
+  }
+
+  .doc-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    min-height: 44px;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+    color: var(--color-on-primary);
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 200ms ease;
+    white-space: nowrap;
+  }
+
+  .doc-download-btn:hover {
+    background: var(--color-primary-40);
+  }
+
+  .doc-copy-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: var(--space-sm);
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+    color: var(--color-muted);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: color 200ms ease, border-color 200ms ease;
+  }
+
+  .doc-copy-link:hover {
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  @media (max-width: 640px) {
+    .document-card {
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .doc-actions {
+      flex-direction: row;
+      width: 100%;
+    }
+
+    .doc-download-btn {
+      flex: 1;
+      justify-content: center;
+    }
+  }
+
+  /* ===== NO RESULTS ===== */
+  .no-results {
+    text-align: center;
+    padding: var(--space-3xl) var(--space-md);
+    font-size: var(--text-body-lg-size);
+    color: var(--color-muted);
+  }
+
+  /* ===== DOWNLOAD BAR ===== */
+  .download-bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 90;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -4px 24px rgba(3, 16, 38, 0.15);
+    padding: var(--space-md) var(--gutter);
+  }
+
+  .download-bar-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .download-bar-count {
+    font-size: var(--text-body-md-size);
+    font-weight: 500;
+    color: var(--color-foreground);
+  }
+
+  .download-bar-actions {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+  }
+
+  .download-bar-deselect {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: var(--space-sm) var(--space-md);
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+    color: var(--color-muted);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: color 200ms ease, border-color 200ms ease;
+  }
+
+  .download-bar-deselect:hover {
+    color: var(--color-danger);
+    border-color: var(--color-danger);
+  }
+
+  .download-bar-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-height: 44px;
+    padding: var(--space-sm) var(--space-lg);
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+    color: var(--color-on-primary);
+    background: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background 200ms ease;
+  }
+
+  .download-bar-cta:hover {
+    background: var(--color-primary-40);
+  }
+
+  @media (max-width: 640px) {
+    .download-bar-inner {
+      flex-direction: column;
+      align-items: stretch;
+      text-align: center;
+    }
+
+    .download-bar-actions {
+      flex-direction: column;
+    }
+
+    .download-bar-cta {
+      justify-content: center;
+    }
+  }
+
+  /* ===== SECTION SHARED ===== */
+  .section-intro {
+    color: var(--color-muted);
+    max-width: 720px;
+    margin-bottom: var(--space-2xl);
+  }
+
+  @media (max-width: 640px) {
+    .section-intro {
+      font-size: var(--text-body-md-size);
+      margin-bottom: var(--space-xl);
+    }
+  }
+
+  /* ===== CATALOG CARDS ===== */
+  .catalogs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+
+  .catalog-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    transition: border-color 200ms ease;
+  }
+
+  .catalog-card:hover {
+    border-color: var(--color-primary-80);
+  }
+
+  .catalog-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .catalog-name {
+    font-size: var(--text-h3-size);
+    font-weight: var(--text-h3-weight);
+    line-height: var(--text-h3-leading);
+    color: var(--color-foreground);
+    margin: 0;
+  }
+
+  .catalog-type-badge {
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    letter-spacing: var(--text-label-sm-spacing);
+    color: var(--color-primary);
+    background: var(--color-primary-95);
+    border-radius: var(--radius-full);
+    padding: 4px 12px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .catalog-description {
+    font-size: var(--text-body-md-size);
+    line-height: var(--text-body-md-leading);
+    color: var(--color-muted);
+    margin: 0;
+    flex: 1;
+  }
+
+  .catalog-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .catalog-datasets {
+    font-size: var(--text-body-sm-size);
+    color: var(--color-muted);
+  }
+
+  .catalog-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+    color: var(--color-primary);
+    text-decoration: none;
+    transition: color 200ms ease;
+  }
+
+  .catalog-link:hover {
+    color: var(--color-primary-40);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 1023px) {
+    .catalogs-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .catalog-card {
+      padding: var(--space-md);
+    }
+
+    .catalog-header {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .catalog-footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,0 +1,72 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  icon: string;
+}
+
+const { title, description, icon } = Astro.props;
+
+const iconPaths: Record<string, string> = {
+  transparencia:
+    "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+  monitoramento:
+    "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+  pesquisa:
+    "M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z",
+  decisao:
+    "M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z",
+};
+---
+
+<div class="pillar-card">
+  <div class="pillar-icon" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d={iconPaths[icon] ?? iconPaths.transparencia} fill="currentColor" />
+    </svg>
+  </div>
+  <h3 class="pillar-title">{title}</h3>
+  <p class="pillar-desc">{description}</p>
+</div>
+
+<style>
+  .pillar-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: border-color 200ms ease;
+  }
+
+  .pillar-card:hover {
+    border-color: var(--color-primary-80);
+  }
+
+  .pillar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto var(--space-md);
+    border-radius: var(--radius-full);
+    background: var(--color-primary-95);
+    color: var(--color-primary-60);
+  }
+
+  .pillar-title {
+    font-size: var(--text-h3-size);
+    font-weight: var(--text-h3-weight);
+    line-height: var(--text-h3-leading);
+    color: var(--color-foreground);
+    margin: 0 0 var(--space-sm);
+  }
+
+  .pillar-desc {
+    font-size: var(--text-body-md-size);
+    line-height: var(--text-body-md-leading);
+    color: var(--color-muted);
+    margin: 0;
+  }
+</style>

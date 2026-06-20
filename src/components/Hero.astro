@@ -1,0 +1,195 @@
+---
+---
+
+<section class="hero" aria-label="Banner principal">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <span class="hero-tag">Dados Abertos — Participação Social</span>
+
+      <h1 class="hero-title">Observatório Nacional da<br />Participação Digital</h1>
+
+      <p class="hero-subtitle">
+        O OPD é do povo brasileiro. Seu propósito é centralizar, integrar e disponibilizar dados, documentos e o histórico da participação digital no Brasil, tratando-a como infraestrutura de dados públicos. É um espaço dinâmico e perene de práticas, memória e transparência.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#mapa" class="cta-primary">Explorar dados</a>
+        <a href="#parceiros" class="cta-secondary">Contribuir</a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="stat-value">947 mil</span>
+        <span class="stat-label">Participantes registrados</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">5.558</span>
+        <span class="stat-label">Municípios com participação digital</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">191</span>
+        <span class="stat-label">Processos participativos mapeados</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">1,4 mi</span>
+        <span class="stat-label">Total de interações</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    background: linear-gradient(135deg, var(--color-primary-10) 0%, var(--color-primary-40) 50%, var(--color-primary) 100%);
+    min-height: 40vh;
+    padding: var(--space-3xl) var(--gutter) var(--space-4xl);
+    color: var(--color-on-primary);
+  }
+
+  .hero-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3xl);
+    align-items: center;
+  }
+
+  .hero-content {
+    max-width: 560px;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    letter-spacing: var(--text-label-sm-spacing);
+    color: var(--color-primary-95);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-full);
+    padding: var(--space-xs) var(--space-md);
+    margin-bottom: var(--space-lg);
+    text-transform: uppercase;
+  }
+
+  .hero-title {
+    font-size: var(--text-display-size);
+    font-weight: var(--text-display-weight);
+    line-height: var(--text-display-leading);
+    letter-spacing: var(--text-display-spacing);
+    color: var(--color-on-primary);
+    margin: 0 0 var(--space-lg);
+  }
+
+  .hero-subtitle {
+    font-size: var(--text-body-md-size);
+    line-height: var(--text-body-md-leading);
+    color: var(--color-primary-95);
+    margin: 0 0 var(--space-xl);
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+  }
+
+  .cta-primary,
+  .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px 24px;
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+    text-decoration: none;
+    border-radius: var(--radius-md);
+    transition: background 200ms ease, color 200ms ease, border-color 200ms ease;
+  }
+
+  .cta-primary {
+    background: var(--color-comp);
+    color: var(--color-on-comp);
+  }
+
+  .cta-primary:hover {
+    background: var(--color-comp-40);
+  }
+
+  .cta-secondary {
+    background: transparent;
+    color: var(--color-on-primary);
+    border: 1px solid var(--color-on-primary);
+  }
+
+  .cta-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Stats grid */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .stat-value {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--color-on-primary);
+    line-height: 1.1;
+  }
+
+  .stat-label {
+    font-size: var(--text-body-sm-size);
+    color: var(--color-primary-95);
+    line-height: var(--text-body-sm-leading);
+  }
+
+  @media (max-width: 900px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+
+    .hero-content {
+      max-width: 100%;
+    }
+
+    .hero-title {
+      font-size: 36px;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .hero {
+      padding: var(--space-xl) var(--space-md) var(--space-xl);
+    }
+
+    .hero-title {
+      font-size: 28px;
+    }
+
+    .hero-ctas {
+      flex-direction: column;
+    }
+
+    .hero-ctas a {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>

@@ -1,0 +1,85 @@
+---
+import TimelineItem from "./TimelineItem.astro";
+
+const milestones = [
+  {
+    year: "2014",
+    title: "Marcos fundadores",
+    description:
+      "Consolidação de iniciativas digitais de participação social. Primeiras plataformas de consulta pública federal.",
+  },
+  {
+    year: "2018",
+    title: "Expansão digital",
+    description:
+      "Expansão de plataformas digitais e consultas públicas online. Crescimento do número de processos participativos remotos.",
+  },
+  {
+    year: "2020",
+    title: "Participação remota",
+    description:
+      "Crescimento acelerado de processos participativos remotos. Adaptação das metodologias ao ambiente digital.",
+  },
+  {
+    year: "2023",
+    title: "Fortalecimento cidadão",
+    description:
+      "Fortalecimento de ambientes digitais para participação cidadã. Consolidação de metodologias participativas digitais.",
+  },
+  {
+    year: "2024",
+    title: "Integração de dados",
+    description:
+      "Integração de dados, painéis e indicadores de participação. Avanço na transparência e acesso a informações estruturadas.",
+  },
+  {
+    year: "2025",
+    title: "Estruturação do Observatório",
+    description:
+      "Criação formal do Observatório da Participação Digital. Centralização de dados, indicadores e publicações.",
+  },
+];
+---
+
+<div class="timeline-container">
+  <div class="timeline-line" aria-hidden="true"></div>
+  <ol class="timeline-list" role="list">
+    {milestones.map((m, i) => (
+      <TimelineItem
+        year={m.year}
+        title={m.title}
+        description={m.description}
+        position={i % 2 === 0 ? "left" : "right"}
+      />
+    ))}
+  </ol>
+</div>
+
+<style>
+  .timeline-container {
+    position: relative;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .timeline-line {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border);
+    transform: translateX(-50%);
+  }
+
+  .timeline-list {
+    margin: 0;
+    padding: 0;
+  }
+
+  @media (max-width: 900px) {
+    .timeline-line {
+      left: 17px;
+    }
+  }
+</style>

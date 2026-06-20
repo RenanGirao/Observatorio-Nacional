@@ -1,0 +1,62 @@
+---
+export interface Props {
+  method: "GET" | "POST";
+  path: string;
+  description: string;
+}
+
+const { method, path, description } = Astro.props;
+const methodColor = method === "GET" ? "var(--color-tri-right-80)" : "var(--color-comp-80)";
+---
+
+<div class="api-endpoint">
+  <div class="api-header">
+    <span class="api-method" style={`color: ${methodColor}`}>{method}</span>
+    <code class="api-path">{path}</code>
+  </div>
+  <p class="api-desc">{description}</p>
+</div>
+
+<style>
+  .api-endpoint {
+    background: var(--color-primary-20);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    transition: border-color 200ms ease;
+  }
+
+  .api-endpoint:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .api-header {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .api-method {
+    font-size: var(--text-label-sm-size);
+    font-weight: 600;
+    letter-spacing: var(--text-label-sm-spacing);
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .api-path {
+    font-family: var(--font-mono);
+    font-size: var(--text-mono-md-size);
+    color: var(--color-primary-80);
+    word-break: break-all;
+  }
+
+  .api-desc {
+    font-size: var(--text-body-sm-size);
+    line-height: var(--text-body-sm-leading);
+    color: var(--color-primary-95);
+    margin: 0;
+  }
+</style>

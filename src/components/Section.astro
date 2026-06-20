@@ -1,0 +1,73 @@
+---
+export interface Props {
+  id?: string;
+  variant?: "light" | "dark" | "parceiros";
+  ariaLabel?: string;
+}
+
+const { id, variant = "light", ariaLabel } = Astro.props;
+---
+
+<section
+  id={id}
+  class:list={["section", `section-${variant}`]}
+  aria-label={ariaLabel}
+>
+  <div class="section-inner">
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    padding: var(--space-4xl) var(--gutter);
+  }
+
+  .section-light {
+    background: var(--color-background);
+    color: var(--color-foreground);
+  }
+
+  .section-dark {
+    background: var(--color-primary-10);
+    color: var(--color-on-primary);
+  }
+
+  .section-dark :global(h2) {
+    color: var(--color-on-primary);
+  }
+
+  .section-dark :global(.text-muted) {
+    color: var(--color-primary-80);
+  }
+
+  .section-parceiros {
+    background: var(--color-primary-40);
+    color: var(--color-on-primary);
+  }
+
+  .section-parceiros :global(h2) {
+    color: var(--color-on-primary);
+  }
+
+  .section-parceiros :global(.text-muted) {
+    color: var(--color-primary-80);
+  }
+
+  .section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1023px) {
+    .section {
+      padding: var(--space-2xl) var(--gutter);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .section {
+      padding: var(--space-xl) var(--space-md);
+    }
+  }
+</style>

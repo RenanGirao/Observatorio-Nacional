@@ -1,0 +1,668 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import BrazilMap from "../components/BrazilMap.astro";
+import Footer from "../components/Footer.astro";
+
+const municipios = [
+  { nome: "São Paulo",       uf: "SP", regiao: "Sudeste",      plataforma: "Brasil Participativo", interacoes: 83150  },
+  { nome: "Rio de Janeiro",  uf: "RJ", regiao: "Sudeste",      plataforma: "Brasil Participativo", interacoes: 64085  },
+  { nome: "Brasília",        uf: "DF", regiao: "Centro-Oeste", plataforma: "Brasil Participativo", interacoes: 63626  },
+  { nome: "Porto Alegre",    uf: "RS", regiao: "Sul",          plataforma: "Brasil Participativo", interacoes: 36691  },
+  { nome: "Salvador",        uf: "BA", regiao: "Nordeste",     plataforma: "Brasil Participativo", interacoes: 27994  },
+  { nome: "Belo Horizonte",  uf: "MG", regiao: "Sudeste",      plataforma: "Brasil Participativo", interacoes: 25674  },
+  { nome: "Fortaleza",       uf: "CE", regiao: "Nordeste",     plataforma: "Brasil Participativo", interacoes: 24871  },
+  { nome: "Curitiba",        uf: "PR", regiao: "Sul",          plataforma: "Brasil Participativo", interacoes: 21006  },
+  { nome: "Recife",          uf: "PE", regiao: "Nordeste",     plataforma: "Brasil Participativo", interacoes: 20955  },
+  { nome: "Manaus",          uf: "AM", regiao: "Norte",        plataforma: "Brasil Participativo", interacoes: 13327  },
+];
+---
+
+<Layout title="Explorar Dados — Observatório Nacional da Participação Digital">
+  <Header />
+
+  <main id="conteudo-principal">
+
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-header-inner">
+        <a href="/" class="breadcrumb">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Observatório
+        </a>
+        <h1 class="page-title">Participação por território</h1>
+        <p class="page-subtitle">
+          Explore a participação digital por estado e município, consulte dados por processo participativo e acesse a lista dos municípios mapeados.
+        </p>
+      </div>
+    </div>
+
+    <!-- Mapa interativo -->
+    <section class="mapa-section" id="mapa-interativo" aria-label="Mapa interativo de participação por território">
+      <div class="mapa-section-inner">
+        <div class="mapa-filters">
+          <div class="filter-group">
+            <label class="filter-label" for="filtro-visualizacao">Visualizar por</label>
+            <select id="filtro-visualizacao" class="filter-select">
+              <option>Participantes por município</option>
+              <option>Participantes por processo</option>
+              <option>Municípios com sistema próprio</option>
+              <option>Quantidade de processos</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="filtro-regiao">Região</label>
+            <select id="filtro-regiao" class="filter-select">
+              <option>Todas as regiões</option>
+              <option>Norte</option>
+              <option>Nordeste</option>
+              <option>Centro-Oeste</option>
+              <option>Sudeste</option>
+              <option>Sul</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <label class="filter-label" for="filtro-plataforma">Plataforma</label>
+            <select id="filtro-plataforma" class="filter-select">
+              <option>Todas as plataformas</option>
+              <option>Brasil Participativo</option>
+              <option>e-Democracia</option>
+              <option>Colab</option>
+              <option>Decidim</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mapa-content">
+          <div class="mapa-wrapper">
+            <p class="map-hint">Clique em um estado para ver os dados de participação</p>
+            <BrazilMap />
+            <div class="mapa-legenda" aria-label="Legenda do mapa">
+              <span class="legenda-label">Menor participação</span>
+              <div class="legenda-scale">
+                <div class="legenda-grad"></div>
+              </div>
+              <span class="legenda-label">Maior participação</span>
+            </div>
+          </div>
+
+          <div class="mapa-resumo">
+            <h2 class="mapa-resumo-title">Resumo nacional</h2>
+            <div class="resumo-stats">
+              <div class="resumo-stat">
+                <span class="resumo-stat-value">27</span>
+                <span class="resumo-stat-label">Estados com dados</span>
+              </div>
+              <div class="resumo-stat">
+                <span class="resumo-stat-value">5.558</span>
+                <span class="resumo-stat-label">Municípios mapeados</span>
+              </div>
+              <div class="resumo-stat">
+                <span class="resumo-stat-value">947 mil</span>
+                <span class="resumo-stat-label">Participantes registrados</span>
+              </div>
+              <div class="resumo-stat">
+                <span class="resumo-stat-value">191</span>
+                <span class="resumo-stat-label">Processos participativos</span>
+              </div>
+            </div>
+            <p class="resumo-nota">
+              Clique em um estado no mapa para ver os dados detalhados de participação daquela unidade federativa.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lista de municípios -->
+    <section class="municipios-section" id="municipios" aria-label="Municípios com participação digital">
+      <div class="municipios-section-inner">
+        <div class="municipios-header">
+          <div>
+            <h2>Municípios com participação digital</h2>
+            <p class="municipios-subtitle">
+              Consulte a lista de municípios mapeados pelo Observatório e compare os dados de participação digital por diferentes critérios.
+            </p>
+          </div>
+          <div class="municipios-actions">
+            <input
+              type="search"
+              class="search-input"
+              placeholder="Buscar município..."
+              aria-label="Buscar município"
+            />
+            <button class="export-btn" aria-label="Exportar dados como CSV">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M8 2v8M5 7l3 3 3-3M3 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Exportar CSV
+            </button>
+          </div>
+        </div>
+
+        <div class="table-wrapper" role="region" aria-label="Tabela de municípios" tabindex="0">
+          <table class="municipios-table">
+            <thead>
+              <tr>
+                <th scope="col" class="sortable" aria-sort="none">
+                  <button class="sort-btn">Município <span class="sort-icon" aria-hidden="true">↕</span></button>
+                </th>
+                <th scope="col">UF</th>
+                <th scope="col">Região</th>
+                <th scope="col">Plataforma</th>
+                <th scope="col" class="sortable" aria-sort="descending">
+                  <button class="sort-btn">Interações <span class="sort-icon" aria-hidden="true">↓</span></button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {municipios.map(m => (
+                <tr>
+                  <td class="td-nome">
+                    <a href="#" class="municipio-link">{m.nome}</a>
+                  </td>
+                  <td>
+                    <span class="uf-badge">{m.uf}</span>
+                  </td>
+                  <td>{m.regiao}</td>
+                  <td class="td-plataforma">{m.plataforma}</td>
+                  <td class="td-num">{m.interacoes.toLocaleString('pt-BR')}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <span class="table-count">Exibindo {municipios.length} de 5.558 municípios</span>
+          <div class="pagination" aria-label="Paginação">
+            <button class="page-btn" aria-label="Página anterior" disabled>‹</button>
+            <button class="page-btn active" aria-current="page">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <span class="page-ellipsis">…</span>
+            <button class="page-btn">324</button>
+            <button class="page-btn" aria-label="Próxima página">›</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* ===== PAGE HEADER ===== */
+  .page-header {
+    background: var(--color-primary-10);
+    padding: var(--space-2xl) var(--gutter) var(--space-3xl);
+    color: var(--color-on-primary);
+  }
+
+  .page-header-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .breadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: var(--text-body-sm-size);
+    color: var(--color-primary-80);
+    text-decoration: none;
+    margin-bottom: var(--space-lg);
+    transition: color 200ms ease;
+  }
+
+  .breadcrumb:hover {
+    color: var(--color-primary-95);
+  }
+
+  .page-title {
+    font-size: var(--text-h1-size);
+    font-weight: var(--text-h1-weight);
+    color: var(--color-on-primary);
+    margin: 0 0 var(--space-md);
+  }
+
+  .page-subtitle {
+    font-size: var(--text-body-lg-size);
+    color: var(--color-primary-95);
+    max-width: 680px;
+    margin: 0;
+  }
+
+  /* ===== MAPA SECTION ===== */
+  .mapa-section {
+    background: var(--color-background);
+    padding: var(--space-2xl) var(--gutter);
+  }
+
+  .mapa-section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .mapa-filters {
+    display: flex;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .filter-label {
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--text-label-sm-spacing);
+  }
+
+  .filter-select {
+    height: 40px;
+    padding: 0 var(--space-md);
+    font-size: var(--text-body-sm-size);
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    min-width: 220px;
+  }
+
+  .mapa-content {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+
+  .mapa-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    align-items: center;
+  }
+
+  .map-hint {
+    font-size: var(--text-body-sm-size);
+    color: var(--color-muted);
+    margin: 0;
+    text-align: center;
+  }
+
+  .mapa-legenda {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-size: var(--text-label-sm-size);
+    color: var(--color-muted);
+  }
+
+  .legenda-scale {
+    width: 140px;
+    height: 10px;
+    border-radius: var(--radius-full);
+    overflow: hidden;
+  }
+
+  .legenda-grad {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, var(--color-primary-95), var(--color-primary));
+  }
+
+  .legenda-label {
+    white-space: nowrap;
+  }
+
+  /* Resumo sidebar */
+  .mapa-resumo {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+  }
+
+  .mapa-resumo-title {
+    font-size: var(--text-h3-size);
+    font-weight: var(--text-h3-weight);
+    color: var(--color-foreground);
+    margin: 0 0 var(--space-lg);
+  }
+
+  .resumo-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .resumo-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .resumo-stat-value {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-primary);
+    line-height: 1.1;
+  }
+
+  .resumo-stat-label {
+    font-size: var(--text-label-sm-size);
+    color: var(--color-muted);
+    line-height: 1.3;
+  }
+
+  .resumo-nota {
+    font-size: var(--text-body-sm-size);
+    color: var(--color-muted);
+    margin: 0;
+    line-height: var(--text-body-sm-leading);
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--space-md);
+  }
+
+  @media (max-width: 1023px) {
+    .mapa-content {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ===== MUNICÍPIOS TABLE ===== */
+  .municipios-section {
+    padding: var(--space-2xl) var(--gutter);
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .municipios-section-inner {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+
+  .municipios-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-xl);
+    margin-bottom: var(--space-xl);
+    flex-wrap: wrap;
+  }
+
+  .municipios-header h2 {
+    margin: 0 0 var(--space-sm);
+  }
+
+  .municipios-subtitle {
+    font-size: var(--text-body-md-size);
+    color: var(--color-muted);
+    max-width: 560px;
+    margin: 0;
+  }
+
+  .municipios-actions {
+    display: flex;
+    gap: var(--space-sm);
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .search-input {
+    height: 40px;
+    padding: 0 var(--space-md);
+    font-size: var(--text-body-sm-size);
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    width: 200px;
+    outline: none;
+  }
+
+  .search-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(24, 73, 155, 0.12);
+  }
+
+  .export-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    height: 40px;
+    padding: 0 var(--space-md);
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    font-family: var(--font-sans);
+    color: var(--color-primary);
+    background: var(--color-surface);
+    border: 1px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 200ms ease;
+  }
+
+  .export-btn:hover {
+    background: var(--color-primary-95);
+  }
+
+  /* Table */
+  .table-wrapper {
+    overflow-x: auto;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-lg);
+  }
+
+  .municipios-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-body-sm-size);
+  }
+
+  .municipios-table th {
+    background: var(--color-background);
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: var(--text-label-sm-spacing);
+    border-bottom: 1px solid var(--color-border);
+    white-space: nowrap;
+  }
+
+  .municipios-table td {
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-foreground);
+    vertical-align: middle;
+  }
+
+  .municipios-table tr:last-child td {
+    border-bottom: none;
+  }
+
+  .municipios-table tr:hover td {
+    background: var(--color-background);
+  }
+
+  .sort-btn {
+    background: none;
+    border: none;
+    font-size: inherit;
+    font-weight: inherit;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0;
+  }
+
+  .sort-icon {
+    color: var(--color-border);
+  }
+
+  .td-nome {
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .municipio-link {
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .municipio-link:hover {
+    text-decoration: underline;
+  }
+
+  .uf-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-foreground);
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 2px 6px;
+  }
+
+  .sistema-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    padding: 2px 8px;
+  }
+
+  .sistema-badge.sim {
+    color: var(--color-success);
+    background: rgba(23, 163, 74, 0.1);
+  }
+
+  .sistema-badge.nao {
+    color: var(--color-muted);
+    background: var(--color-background);
+  }
+
+  .td-plataforma {
+    white-space: nowrap;
+  }
+
+  .td-num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .td-data {
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+
+  /* Table footer */
+  .table-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-lg);
+    flex-wrap: wrap;
+  }
+
+  .table-count {
+    font-size: var(--text-body-sm-size);
+    color: var(--color-muted);
+  }
+
+  .pagination {
+    display: flex;
+    gap: var(--space-xs);
+    align-items: center;
+  }
+
+  .page-btn {
+    min-width: 36px;
+    height: 36px;
+    padding: 0 var(--space-sm);
+    font-size: var(--text-body-sm-size);
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 200ms ease;
+  }
+
+  .page-btn:hover:not(:disabled) {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .page-btn.active {
+    background: var(--color-primary);
+    color: var(--color-on-primary);
+    border-color: var(--color-primary);
+  }
+
+  .page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .page-ellipsis {
+    color: var(--color-muted);
+    font-size: var(--text-body-sm-size);
+    padding: 0 var(--space-xs);
+  }
+
+  @media (max-width: 640px) {
+    .municipios-header {
+      flex-direction: column;
+    }
+
+    .municipios-actions {
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .search-input {
+      flex: 1;
+      width: auto;
+    }
+
+    .table-footer {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .mapa-filters {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -1,0 +1,72 @@
+---
+export interface Props {
+  name: string;
+  description: string;
+}
+
+const { name, description } = Astro.props;
+
+/* Generate initials from the partner name */
+const initials = name
+  .split(" ")
+  .filter((_, i, arr) => i === 0 || i === arr.length - 1)
+  .map(w => w.charAt(0))
+  .join("")
+  .toUpperCase()
+  .slice(0, 3);
+---
+
+<div class="partner-card">
+  <div class="partner-logo" aria-hidden="true">
+    <span class="partner-initials">{initials}</span>
+  </div>
+  <h3 class="partner-name">{name}</h3>
+  <p class="partner-desc">{description}</p>
+</div>
+
+<style>
+  .partner-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg);
+    text-align: center;
+    transition: border-color 200ms ease;
+  }
+
+  .partner-card:hover {
+    border-color: var(--color-primary-80);
+  }
+
+  .partner-logo {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto var(--space-md);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .partner-initials {
+    font-size: var(--text-h2-size);
+    font-weight: var(--text-h2-weight);
+    color: var(--color-primary);
+  }
+
+  .partner-name {
+    font-size: var(--text-label-md-size);
+    font-weight: var(--text-label-md-weight);
+    line-height: var(--text-label-md-leading);
+    color: var(--color-foreground);
+    margin: 0 0 var(--space-xs);
+  }
+
+  .partner-desc {
+    font-size: var(--text-body-sm-size);
+    line-height: var(--text-body-sm-leading);
+    color: var(--color-muted);
+    margin: 0;
+  }
+</style>
