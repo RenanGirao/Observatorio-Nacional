@@ -1,0 +1,279 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+---
+
+<footer class="br-footer" role="contentinfo">
+
+  <!-- Barra gov.br -->
+  <div class="br-footer-govbar">
+    <div class="br-footer-inner">
+      <a href="https://www.gov.br/pt-br" target="_blank" rel="noopener" class="br-footer-govlogo" aria-label="Portal Gov.br">
+        <svg width="80" height="20" viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <text x="0" y="16" font-family="sans-serif" font-size="16" font-weight="700" fill="#fff">gov.br</text>
+        </svg>
+      </a>
+      <span class="br-footer-govtext">
+        O Observatório Nacional da Participação Digital é uma iniciativa do Governo Federal.
+      </span>
+    </div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="br-footer-main">
+    <div class="br-footer-inner">
+
+      <div class="br-footer-brand">
+        <a href={`${base}/`} class="br-footer-brand-link" aria-label="Página inicial do Observatório">
+          <span class="br-footer-brand-name">Observatório Nacional<br/>da Participação Digital</span>
+        </a>
+        <p class="br-footer-brand-desc">
+          Dados, documentos e histórico da participação digital no Brasil.
+        </p>
+        <p class="br-footer-license">
+          Conteúdo disponível sob
+          <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.pt" target="_blank" rel="noopener license">
+            Licença Creative Commons BY-SA 4.0
+          </a>
+        </p>
+      </div>
+
+      <nav class="br-footer-nav" aria-label="Navegação do rodapé">
+        <div class="br-footer-col">
+          <h3 class="br-footer-heading">Explorar</h3>
+          <ul>
+            <li><a href={`${base}/explorar-dados`}>Mapa interativo</a></li>
+            <li><a href={`${base}/#linha-do-tempo`}>Linha do Tempo</a></li>
+            <li><a href={`${base}/#plataformas`}>Plataformas</a></li>
+            <li><a href={`${base}/#pesquisas`}>Pesquisas</a></li>
+          </ul>
+        </div>
+        <div class="br-footer-col">
+          <h3 class="br-footer-heading">Dados</h3>
+          <ul>
+            <li><a href={`${base}/#dados-abertos`}>Dados abertos</a></li>
+            <li><a href="https://dados.gov.br/dados/busca?termo=Brasil%20Participativo" target="_blank" rel="noopener">Portal de dados</a></li>
+            <li><a href={`${base}/#parceiros`}>Parceiros</a></li>
+          </ul>
+        </div>
+        <div class="br-footer-col">
+          <h3 class="br-footer-heading">Institucional</h3>
+          <ul>
+            <li><a href={`${base}/#sobre`}>Sobre o OPD</a></li>
+            <li><a href={`${base}/#submeter-pesquisa`}>Submeter pesquisa</a></li>
+            <li><a href={`${base}/#parceiros`}>Contribuir</a></li>
+          </ul>
+        </div>
+        <div class="br-footer-col">
+          <h3 class="br-footer-heading">Links úteis</h3>
+          <ul>
+            <li><a href="https://brasilparticipativo.presidencia.gov.br" target="_blank" rel="noopener">Brasil Participativo</a></li>
+            <li><a href="https://www.gov.br/pt-br" target="_blank" rel="noopener">Gov.br</a></li>
+            <li><a href="https://github.com/RenanGirao/Observatorio-Nacional" target="_blank" rel="noopener">Código-fonte</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    </div>
+  </div>
+
+  <!-- Barra inferior -->
+  <div class="br-footer-bottom">
+    <div class="br-footer-inner">
+      <div class="br-footer-logos">
+        <a href="https://www.gov.br/pt-br" target="_blank" rel="noopener" aria-label="Gov.br">
+          <svg width="60" height="16" viewBox="0 0 60 16" aria-hidden="true">
+            <text x="0" y="13" font-family="sans-serif" font-size="13" font-weight="700" fill="rgba(255,255,255,0.7)">gov.br</text>
+          </svg>
+        </a>
+      </div>
+      <p class="br-footer-credit">
+        Desenvolvido com dados abertos do
+        <a href="https://brasilparticipativo.presidencia.gov.br" target="_blank" rel="noopener">Brasil Participativo</a>
+      </p>
+    </div>
+  </div>
+
+</footer>
+
+<style>
+  .br-footer {
+    font-family: inherit;
+  }
+
+  /* Barra gov.br */
+  .br-footer-govbar {
+    background: #071d41;
+    padding: 0.875rem 0;
+    border-top: 3px solid #1351b4;
+  }
+
+  .br-footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--gutter, 1.5rem);
+  }
+
+  .br-footer-govbar .br-footer-inner {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .br-footer-govlogo {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .br-footer-govtext {
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.4;
+  }
+
+  /* Main */
+  .br-footer-main {
+    background: #0c2d6b;
+    padding: 3rem 0;
+  }
+
+  .br-footer-main .br-footer-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .br-footer-brand-link {
+    text-decoration: none;
+  }
+
+  .br-footer-brand-name {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+
+  .br-footer-brand-desc {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.65);
+    margin: 0 0 1rem;
+    line-height: 1.5;
+  }
+
+  .br-footer-license {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .br-footer-license a {
+    color: rgba(255,255,255,0.7);
+    text-underline-offset: 2px;
+  }
+
+  .br-footer-license a:hover {
+    color: #fff;
+  }
+
+  /* Nav columns */
+  .br-footer-nav {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+
+  .br-footer-heading {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin: 0 0 0.875rem;
+  }
+
+  .br-footer-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .br-footer-col a {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: color 150ms ease;
+    line-height: 1.4;
+  }
+
+  .br-footer-col a:hover {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  /* Bottom bar */
+  .br-footer-bottom {
+    background: #071d41;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .br-footer-bottom .br-footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .br-footer-logos {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .br-footer-credit {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.45);
+    margin: 0;
+  }
+
+  .br-footer-credit a {
+    color: rgba(255,255,255,0.6);
+    text-underline-offset: 2px;
+  }
+
+  .br-footer-credit a:hover {
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .br-footer-main .br-footer-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    .br-footer-nav {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .br-footer-nav {
+      grid-template-columns: 1fr;
+    }
+    .br-footer-govbar .br-footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+    }
+  }
+</style>
