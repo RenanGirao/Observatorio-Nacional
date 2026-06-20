@@ -188,8 +188,8 @@ const states: Array<{ id: string; name: string; abbr: string; }> = [
 
       popupTitle.textContent = `${name} (${abbr})`;
       popupBody.textContent = `Consulte os indicadores de participação digital do estado de ${name}.`;
-      const base = (popupLink as HTMLAnchorElement).dataset.base ?? "/";
-      popupLink.setAttribute("href", `${base}explorar-dados`);
+      const base = ((popupLink as HTMLAnchorElement).dataset.base ?? "/").replace(/\/$/, "");
+      popupLink.setAttribute("href", `${base}/explorar-dados`);
 
       popup.hidden = false;
     });
