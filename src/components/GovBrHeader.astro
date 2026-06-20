@@ -175,6 +175,25 @@ const govbrLogo = `${base}/govbr-logo.png`;
   document.getElementById("contrast-btn")?.addEventListener("click", () => {
     document.documentElement.classList.toggle("high-contrast");
   });
+
+  // Compact header on scroll — esconde .header-top ao rolar
+  const header = document.getElementById("br-header");
+  const headerTop = header?.querySelector(".header-top") as HTMLElement | null;
+  let lastScroll = 0;
+  let ticking = false;
+
+  function updateHeaderCompact() {
+    const scrolled = window.scrollY > 56;
+    header?.classList.toggle("is-compact", scrolled);
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(updateHeaderCompact);
+      ticking = true;
+    }
+  }, { passive: true });
 </script>
 
 <style>
@@ -189,6 +208,27 @@ const govbrLogo = `${base}/govbr-logo.png`;
     top: 0;
     z-index: 200;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  /* Barra superior — colapsa ao rolar */
+  .header-top {
+    overflow: hidden;
+    max-height: 64px;
+    transition: max-height 220ms ease, padding 220ms ease, opacity 180ms ease;
+    opacity: 1;
+  }
+
+  .br-header.is-compact .header-top {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Separador da barra superior some junto */
+  .br-header.is-compact .header-top {
+    border-bottom: none;
   }
 
   .br-container-lg {
