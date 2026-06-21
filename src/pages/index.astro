@@ -360,7 +360,11 @@ const pesquisas = [
             tipVal.textContent = formatVal(d.valor, label);
             tooltip.hidden = false;
             const x = PAD.left + (idx / (data.length - 1)) * cW;
-            tooltip.style.left = (x / rect.width * 100) + "%";
+            const pct = (x / rect.width) * 100;
+            const tooltipHalfW = 40; // half of 80px tooltip width in px
+            const minPct = (tooltipHalfW / rect.width) * 100;
+            const maxPct = 100 - minPct;
+            tooltip.style.left = Math.min(maxPct, Math.max(minPct, pct)) + "%";
           };
           canvas.onmouseleave = () => { tooltip.hidden = true; };
         }
@@ -894,7 +898,6 @@ const pesquisas = [
   .chart-tooltip {
     position: absolute;
     top: var(--space-lg);
-    right: var(--space-xl);
     background: var(--color-primary);
     color: #fff;
     border-radius: var(--radius-md);
@@ -904,9 +907,10 @@ const pesquisas = [
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    min-width: 80px;
+    width: 80px;
     text-align: center;
     transition: opacity 150ms ease;
+    transform: translateX(-50%);
   }
 
   .chart-tooltip[hidden] {
