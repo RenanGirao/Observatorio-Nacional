@@ -133,7 +133,7 @@ const pesquisas = [
 
     <!-- Mapa Interativo -->
     <Section id="mapa" ariaLabel="Explore a participação em todo o Brasil" variant="dark">
-      <span class="section-tag">Participação por território</span>
+      <span class="br-tag is-inverted">Participação por território</span>
       <h2 class="on-dark">Explore a participação em todo o Brasil</h2>
       <p class="text-body-lg section-intro on-dark">
         Explore a participação digital nos municípios brasileiros e visualize dados sobre participantes, processos e plataformas por território.
@@ -164,7 +164,7 @@ const pesquisas = [
             </div>
           </div>
 
-          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/explorar-dados`} class="cta-mapa">
+          <a href={`${import.meta.env.BASE_URL.replace(/\/$/, '')}/explorar-dados`} class="br-button on-dark block large">
             Explorar Mapa Interativo
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -176,28 +176,28 @@ const pesquisas = [
 
     <!-- Evolução da Participação Digital -->
     <Section id="evolucao" ariaLabel="Evolução da participação digital">
-      <span class="section-tag-light">Série histórica</span>
+      <span class="br-tag">Série histórica</span>
       <h2>Evolução da participação digital</h2>
       <p class="text-body-lg section-intro">
         Acompanhe como os principais indicadores de participação digital evoluíram ao longo do tempo no Brasil.
       </p>
 
       <div class="evolucao-filters">
-        <div class="filter-group">
-          <label class="filter-label" for="filtro-indicador">Indicador</label>
-          <select id="filtro-indicador" class="filter-select">
+        <div class="filter-group br-select">
+          <label for="filtro-indicador">Indicador</label>
+          <div class="select-wrap"><select id="filtro-indicador">
             <option>Inscritos na plataforma</option>
             <option>Visualizações da página</option>
             <option>Processos publicados</option>
-          </select>
+          </select></div>
         </div>
-        <div class="filter-group">
-          <label class="filter-label" for="filtro-periodo">Período</label>
-          <select id="filtro-periodo" class="filter-select">
+        <div class="filter-group br-select">
+          <label for="filtro-periodo">Período</label>
+          <div class="select-wrap"><select id="filtro-periodo">
             <option>Anual</option>
             <option>Trimestral</option>
             <option>Mensal</option>
-          </select>
+          </select></div>
         </div>
       </div>
 
@@ -283,15 +283,15 @@ const pesquisas = [
             ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(PAD.left + cW, y); ctx.stroke();
             const tickVal = maxV - (maxV / ticks) * i;
             ctx.fillStyle = "#6b7280";
-            ctx.font = "11px Inter, sans-serif";
+            ctx.font = "11px Rawline, Raleway, sans-serif";
             ctx.textAlign = "right";
             ctx.fillText(formatVal(Math.round(tickVal), label), PAD.left - 8, y + 4);
           }
 
           // Area fill
           const grad = ctx.createLinearGradient(0, PAD.top, 0, PAD.top + cH);
-          grad.addColorStop(0, "rgba(24,73,155,0.18)");
-          grad.addColorStop(1, "rgba(24,73,155,0.01)");
+          grad.addColorStop(0, "rgba(19,81,180,0.18)");
+          grad.addColorStop(1, "rgba(19,81,180,0.01)");
           ctx.beginPath();
           ctx.moveTo(xOf(0), yOf(vals[0]));
           for (let i = 1; i < data.length; i++) {
@@ -315,7 +315,7 @@ const pesquisas = [
             const cpx = (x0 + x1) / 2;
             ctx.bezierCurveTo(cpx, y0, cpx, y1, x1, y1);
           }
-          ctx.strokeStyle = "#18499b";
+          ctx.strokeStyle = "#1351B4";
           ctx.lineWidth = 2.5;
           ctx.lineJoin = "round";
           ctx.stroke();
@@ -326,12 +326,12 @@ const pesquisas = [
             ctx.beginPath();
             ctx.arc(x, y, 4.5, 0, Math.PI * 2);
             ctx.fillStyle = "#fff";
-            ctx.strokeStyle = "#18499b";
+            ctx.strokeStyle = "#1351B4";
             ctx.lineWidth = 2;
             ctx.fill(); ctx.stroke();
 
             ctx.fillStyle = "#6b7280";
-            ctx.font = "11px Inter, sans-serif";
+            ctx.font = "11px Rawline, Raleway, sans-serif";
             ctx.textAlign = "center";
             ctx.fillText(String(d.ano), x, PAD.top + cH + 22);
           });
@@ -401,7 +401,7 @@ const pesquisas = [
     <Section id="dados-abertos" ariaLabel="Acesse os dados abertos do Brasil Participativo" variant="dark">
       <div class="banner-dados">
         <div class="banner-dados-content">
-          <span class="section-tag">Dados abertos</span>
+          <span class="br-tag is-inverted">Dados abertos</span>
           <h2 class="on-dark">Acesse os dados abertos do Brasil Participativo</h2>
           <p class="text-body-lg on-dark">
             Consulte bases públicas, indicadores e informações estruturadas sobre processos de participação digital realizados no Brasil Participativo.
@@ -410,7 +410,7 @@ const pesquisas = [
             href="https://dados.gov.br/dados/busca?termo=Brasil%20Participativo"
             target="_blank"
             rel="noopener noreferrer"
-            class="cta-primary"
+            class="br-button on-dark"
           >
             Acessar dados abertos
           </a>
@@ -428,26 +428,26 @@ const pesquisas = [
 
     <!-- Plataformas de Participação Digital -->
     <Section id="plataformas" ariaLabel="Plataformas de participação digital">
-      <span class="section-tag-light">Ecossistema</span>
+      <span class="br-tag">Ecossistema</span>
       <h2>Plataformas de participação digital</h2>
       <p class="text-body-lg section-intro">
         Conheça as plataformas digitais utilizadas para promover participação social, consultas públicas, propostas, votações e outras formas de colaboração cidadã.
       </p>
 
       <div class="plataformas-filters">
-        <button class="filter-chip active">Todas</button>
-        <button class="filter-chip">Federal</button>
-        <button class="filter-chip">Estadual</button>
-        <button class="filter-chip">Municipal</button>
-        <button class="filter-chip">Sociedade civil</button>
+        <button class="br-tag is-interactive is-active" aria-pressed="true">Todas</button>
+        <button class="br-tag is-interactive" aria-pressed="false">Federal</button>
+        <button class="br-tag is-interactive" aria-pressed="false">Estadual</button>
+        <button class="br-tag is-interactive" aria-pressed="false">Municipal</button>
+        <button class="br-tag is-interactive" aria-pressed="false">Sociedade civil</button>
       </div>
 
       <div class="plataformas-grid">
         {plataformas.map(p => (
-          <a href={p.link} target="_blank" rel="noopener noreferrer" class="plataforma-card">
+          <a href={p.link} target="_blank" rel="noopener noreferrer" class="plataforma-card br-card is-link">
             <div class="plataforma-header">
               <span class="plataforma-nome">{p.nome}</span>
-              <span class="plataforma-esfera">{p.esfera}</span>
+              <span class="plataforma-esfera br-tag">{p.esfera}</span>
             </div>
             <span class="plataforma-instituicao">{p.instituicao}</span>
             <p class="plataforma-desc">{p.descricao}</p>
@@ -459,7 +459,7 @@ const pesquisas = [
 
     <!-- Repositório de Pesquisas -->
     <Section id="pesquisas" ariaLabel="Repositório de pesquisas sobre participação digital">
-      <span class="section-tag-light">Conhecimento</span>
+      <span class="br-tag">Conhecimento</span>
       <h2>Repositório de pesquisas sobre participação digital</h2>
       <p class="text-body-lg section-intro">
         Explore estudos, artigos, relatórios e publicações sobre participação social digital, democracia participativa, governo aberto e tecnologias cívicas.
@@ -467,9 +467,9 @@ const pesquisas = [
 
       <div class="pesquisas-grid">
         {pesquisas.map(p => (
-          <article class="pesquisa-card">
+          <article class="pesquisa-card br-card">
             <div class="pesquisa-header">
-              <span class="pesquisa-tipo">{p.tipo}</span>
+              <span class="pesquisa-tipo br-tag">{p.tipo}</span>
               <span class="pesquisa-ano">{p.ano}</span>
             </div>
             <h3 class="pesquisa-titulo">{p.titulo}</h3>
@@ -481,84 +481,85 @@ const pesquisas = [
       </div>
 
       <div class="pesquisas-footer">
-        <a href="#" class="cta-outline">Ver todas as pesquisas</a>
+        <a href="#" class="br-button secondary">Ver todas as pesquisas</a>
       </div>
     </Section>
 
     <!-- Formulário para submeter pesquisas -->
     <Section id="submeter-pesquisa" ariaLabel="Submeta uma pesquisa">
-      <span class="section-tag-light">Colabore</span>
+      <span class="br-tag">Colabore</span>
       <h2>Submeta uma pesquisa</h2>
       <p class="text-body-lg section-intro">
         Contribua com o fortalecimento do conhecimento sobre participação digital no Brasil enviando pesquisas, relatórios, artigos e publicações para avaliação.
       </p>
-      <button class="btn-submit" id="btn-abrir-modal" type="button">
+      <button class="br-button primary large" id="btn-abrir-modal" type="button">
         Submeter pesquisa
       </button>
     </Section>
 
     <!-- Modal de submissão de pesquisa -->
-    <dialog class="modal-pesquisa" id="modal-pesquisa" aria-labelledby="modal-pesquisa-titulo" aria-modal="true">
-      <div class="modal-inner">
-        <div class="modal-header">
-          <h2 class="modal-titulo" id="modal-pesquisa-titulo">Submeta uma pesquisa</h2>
-          <button class="modal-fechar" id="modal-fechar" type="button" aria-label="Fechar">
+    <dialog class="br-modal" id="modal-pesquisa" aria-labelledby="modal-pesquisa-titulo" aria-modal="true">
+        <div class="br-modal-header">
+          <h2 class="modal-title" id="modal-pesquisa-titulo">Submeta uma pesquisa</h2>
+          <button class="br-modal-close" id="modal-fechar" type="button" aria-label="Fechar">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
               <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
           </button>
         </div>
 
-        <div class="modal-body">
+        <div class="br-modal-body">
           <form class="form-pesquisa" id="form-pesquisa" novalidate>
-            <fieldset class="form-fieldset">
-              <legend class="form-legend">Dados do responsável pela submissão</legend>
+            <fieldset class="br-fieldset">
+              <legend>Dados do responsável pela submissão</legend>
               <div class="form-row">
                 <div class="form-field">
-                  <label class="form-label" for="resp-nome">Nome completo <span aria-hidden="true">*</span></label>
-                  <input class="form-input" type="text" id="resp-nome" name="nome" required autocomplete="name" />
+                  <div class="br-input">
+                    <label for="resp-nome">Nome completo <span aria-hidden="true">*</span></label>
+                    <input type="text" id="resp-nome" name="nome" required autocomplete="name" />
+                  </div>
                 </div>
-                <div class="form-field">
-                  <label class="form-label" for="resp-email">E-mail <span aria-hidden="true">*</span></label>
-                  <input class="form-input" type="email" id="resp-email" name="email" required autocomplete="email" />
+                <div class="form-field br-input">
+                  <label for="resp-email">E-mail <span aria-hidden="true">*</span></label>
+                  <input type="email" id="resp-email" name="email" required autocomplete="email" />
                 </div>
               </div>
               <div class="form-row">
-                <div class="form-field">
-                  <label class="form-label" for="resp-instituicao">Instituição ou organização <span aria-hidden="true">*</span></label>
-                  <input class="form-input" type="text" id="resp-instituicao" name="instituicao" required />
+                <div class="form-field br-input">
+                  <label for="resp-instituicao">Instituição ou organização <span aria-hidden="true">*</span></label>
+                  <input type="text" id="resp-instituicao" name="instituicao" required />
                 </div>
-                <div class="form-field">
-                  <label class="form-label" for="resp-cargo">Cargo ou vínculo institucional <span aria-hidden="true">*</span></label>
-                  <input class="form-input" type="text" id="resp-cargo" name="cargo" required />
+                <div class="form-field br-input">
+                  <label for="resp-cargo">Cargo ou vínculo institucional <span aria-hidden="true">*</span></label>
+                  <input type="text" id="resp-cargo" name="cargo" required />
                 </div>
               </div>
-              <div class="form-field form-field--half">
-                <label class="form-label" for="resp-telefone">Telefone <span class="form-optional">(opcional)</span></label>
-                <input class="form-input" type="tel" id="resp-telefone" name="telefone" autocomplete="tel" />
+              <div class="form-field form-field--half br-input">
+                <label for="resp-telefone">Telefone <span class="form-optional">(opcional)</span></label>
+                <input type="tel" id="resp-telefone" name="telefone" autocomplete="tel" />
               </div>
             </fieldset>
 
-            <fieldset class="form-fieldset">
-              <legend class="form-legend">Dados da pesquisa</legend>
-              <div class="form-field">
-                <label class="form-label" for="pesq-titulo">Título da pesquisa <span aria-hidden="true">*</span></label>
-                <input class="form-input" type="text" id="pesq-titulo" name="pesq_titulo" required />
+            <fieldset class="br-fieldset">
+              <legend>Dados da pesquisa</legend>
+              <div class="form-field br-input">
+                <label for="pesq-titulo">Título da pesquisa <span aria-hidden="true">*</span></label>
+                <input type="text" id="pesq-titulo" name="pesq_titulo" required />
               </div>
               <div class="form-row">
-                <div class="form-field">
-                  <label class="form-label" for="pesq-autores">Autor(es) <span aria-hidden="true">*</span></label>
-                  <input class="form-input" type="text" id="pesq-autores" name="autores" required placeholder="Sobrenome, Nome; Sobrenome, Nome" />
+                <div class="form-field br-input">
+                  <label for="pesq-autores">Autor(es) <span aria-hidden="true">*</span></label>
+                  <input type="text" id="pesq-autores" name="autores" required placeholder="Sobrenome, Nome; Sobrenome, Nome" />
                 </div>
-                <div class="form-field">
-                  <label class="form-label" for="pesq-ano">Ano de publicação <span aria-hidden="true">*</span></label>
-                  <input class="form-input" type="number" id="pesq-ano" name="ano" min="1990" max="2030" required />
+                <div class="form-field br-input">
+                  <label for="pesq-ano">Ano de publicação <span aria-hidden="true">*</span></label>
+                  <input type="number" id="pesq-ano" name="ano" min="1990" max="2030" required />
                 </div>
               </div>
               <div class="form-row">
-                <div class="form-field">
-                  <label class="form-label" for="pesq-tipo">Tipo de publicação <span aria-hidden="true">*</span></label>
-                  <select class="form-select" id="pesq-tipo" name="tipo" required>
+                <div class="form-field br-select">
+                  <label for="pesq-tipo">Tipo de publicação <span aria-hidden="true">*</span></label>
+                  <div class="select-wrap"><select id="pesq-tipo" name="tipo" required>
                     <option value="">Selecione…</option>
                     <option>Artigo</option>
                     <option>Relatório</option>
@@ -568,78 +569,78 @@ const pesquisas = [
                     <option>Capítulo</option>
                     <option>Nota técnica</option>
                     <option>Outro</option>
-                  </select>
+                  </select></div>
                 </div>
-                <div class="form-field">
-                  <label class="form-label" for="pesq-idioma">Idioma da publicação <span aria-hidden="true">*</span></label>
-                  <select class="form-select" id="pesq-idioma" name="idioma" required>
+                <div class="form-field br-select">
+                  <label for="pesq-idioma">Idioma da publicação <span aria-hidden="true">*</span></label>
+                  <div class="select-wrap"><select id="pesq-idioma" name="idioma" required>
                     <option value="">Selecione…</option>
                     <option>Português</option>
                     <option>Inglês</option>
                     <option>Espanhol</option>
                     <option>Outro</option>
-                  </select>
+                  </select></div>
                 </div>
               </div>
               <div class="form-row">
-                <div class="form-field">
-                  <label class="form-label" for="pesq-tema">Tema principal <span aria-hidden="true">*</span></label>
-                  <input class="form-input" type="text" id="pesq-tema" name="tema" required />
+                <div class="form-field br-input">
+                  <label for="pesq-tema">Tema principal <span aria-hidden="true">*</span></label>
+                  <input type="text" id="pesq-tema" name="tema" required />
                 </div>
-                <div class="form-field">
-                  <label class="form-label" for="pesq-palavras">Palavras-chave <span aria-hidden="true">*</span></label>
-                  <input class="form-input" type="text" id="pesq-palavras" name="palavras_chave" required placeholder="Separadas por vírgula" />
+                <div class="form-field br-input">
+                  <label for="pesq-palavras">Palavras-chave <span aria-hidden="true">*</span></label>
+                  <input type="text" id="pesq-palavras" name="palavras_chave" required placeholder="Separadas por vírgula" />
                 </div>
               </div>
-              <div class="form-field">
-                <label class="form-label" for="pesq-resumo">Resumo <span aria-hidden="true">*</span></label>
-                <textarea class="form-textarea" id="pesq-resumo" name="resumo" required rows="4" placeholder="Breve resumo da pesquisa…"></textarea>
+              <div class="form-field br-textarea">
+                <label for="pesq-resumo">Resumo <span aria-hidden="true">*</span></label>
+                <textarea id="pesq-resumo" name="resumo" required rows="4" placeholder="Breve resumo da pesquisa…"></textarea>
               </div>
               <div class="form-row">
-                <div class="form-field">
-                  <label class="form-label" for="pesq-link">Link de acesso <span class="form-optional">(opcional)</span></label>
-                  <input class="form-input" type="url" id="pesq-link" name="link" placeholder="https://" />
+                <div class="form-field br-input">
+                  <label for="pesq-link">Link de acesso <span class="form-optional">(opcional)</span></label>
+                  <input type="url" id="pesq-link" name="link" placeholder="https://" />
                 </div>
-                <div class="form-field">
-                  <label class="form-label" for="pesq-doi">DOI <span class="form-optional">(opcional)</span></label>
-                  <input class="form-input" type="text" id="pesq-doi" name="doi" placeholder="10.xxxx/xxxxx" />
+                <div class="form-field br-input">
+                  <label for="pesq-doi">DOI <span class="form-optional">(opcional)</span></label>
+                  <input type="text" id="pesq-doi" name="doi" placeholder="10.xxxx/xxxxx" />
                 </div>
               </div>
-              <div class="form-field">
-                <label class="form-label" for="pesq-arquivo">Arquivo para upload <span class="form-optional">(opcional)</span></label>
-                <input class="form-input form-file" type="file" id="pesq-arquivo" name="arquivo" accept=".pdf,.doc,.docx" />
-                <span class="form-hint">PDF, DOC ou DOCX. Máximo 20 MB.</span>
+              <div class="form-field br-input">
+                <label for="pesq-arquivo">Arquivo para upload <span class="form-optional">(opcional)</span></label>
+                <input type="file" id="pesq-arquivo" name="arquivo" accept=".pdf,.doc,.docx" />
+                <span class="input-hint">PDF, DOC ou DOCX. Máximo 20 MB.</span>
               </div>
             </fieldset>
 
-            <fieldset class="form-fieldset">
-              <legend class="form-legend">Autorização e revisão</legend>
+            <fieldset class="br-fieldset">
+              <legend>Autorização e revisão</legend>
               <div class="form-checks">
-                <label class="form-check">
+                <label class="br-checkbox">
                   <input type="checkbox" name="autoriza_analise" required />
                   <span>Autorizo a análise desta submissão pela equipe do Observatório.</span>
                 </label>
-                <label class="form-check">
+                <label class="br-checkbox">
                   <input type="checkbox" name="confirma_veracidade" required />
                   <span>Confirmo que as informações enviadas são verdadeiras e de minha responsabilidade.</span>
                 </label>
-                <label class="form-check">
+                <label class="br-checkbox">
                   <input type="checkbox" name="ciente_curadoria" required />
                   <span>Estou ciente de que a submissão passará por curadoria antes de ser publicada.</span>
                 </label>
               </div>
-              <div class="form-field" style="margin-top: var(--space-lg)">
-                <label class="form-label" for="pesq-obs">Observações adicionais <span class="form-optional">(opcional)</span></label>
-                <textarea class="form-textarea" id="pesq-obs" name="observacoes" rows="3" placeholder="Informações complementares que deseje compartilhar…"></textarea>
+              <div class="form-field br-textarea" style="margin-top: var(--space-lg)">
+                <label for="pesq-obs">Observações adicionais <span class="form-optional">(opcional)</span></label>
+                <textarea id="pesq-obs" name="observacoes" rows="3" placeholder="Informações complementares que deseje compartilhar…"></textarea>
               </div>
             </fieldset>
 
             <div class="form-actions">
-              <button type="submit" class="btn-submit">Enviar pesquisa</button>
-              <button type="button" class="btn-cancelar" id="btn-cancelar">Cancelar</button>
+              <button type="submit" class="br-button primary">Enviar pesquisa</button>
+              <button type="button" class="br-button secondary" id="btn-cancelar">Cancelar</button>
             </div>
 
-            <div class="form-success" id="form-pesquisa-success" hidden aria-live="polite">
+            <div class="form-success br-message success" id="form-pesquisa-success" hidden aria-live="polite">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               <div>
                 <strong>Submissão recebida!</strong>
@@ -648,7 +649,6 @@ const pesquisas = [
             </div>
           </form>
         </div>
-      </div>
     </dialog>
 
     <script>
@@ -678,28 +678,28 @@ const pesquisas = [
 
       <form class="form-interesse" id="form-interesse" novalidate>
         <div class="form-row">
-          <div class="form-field">
-            <label class="form-label form-label--dark" for="int-nome">Nome completo <span aria-hidden="true">*</span></label>
-            <input class="form-input form-input--dark" type="text" id="int-nome" name="nome" required autocomplete="name" />
+          <div class="form-field br-input is-inverted">
+            <label for="int-nome">Nome completo <span aria-hidden="true">*</span></label>
+            <input type="text" id="int-nome" name="nome" required autocomplete="name" />
           </div>
-          <div class="form-field">
-            <label class="form-label form-label--dark" for="int-telefone">Telefone <span aria-hidden="true">*</span></label>
-            <input class="form-input form-input--dark" type="tel" id="int-telefone" name="telefone" required autocomplete="tel" />
+          <div class="form-field br-input is-inverted">
+            <label for="int-telefone">Telefone <span aria-hidden="true">*</span></label>
+            <input type="tel" id="int-telefone" name="telefone" required autocomplete="tel" />
           </div>
         </div>
-        <div class="form-field form-field--half">
-          <label class="form-label form-label--dark" for="int-perfil">Perfil <span aria-hidden="true">*</span></label>
-          <select class="form-select form-select--dark" id="int-perfil" name="perfil" required>
+        <div class="form-field form-field--half br-select is-inverted">
+          <label for="int-perfil">Perfil <span aria-hidden="true">*</span></label>
+          <div class="select-wrap"><select id="int-perfil" name="perfil" required>
             <option value="">Selecione seu perfil…</option>
             <option value="pesquisador">Pesquisador — uso dos dados para pesquisa</option>
             <option value="provedor">Provedor de serviços — integração ou suporte técnico</option>
             <option value="gestor">Gestor municipal — compartilhar dados ou conhecer a participação no município</option>
-          </select>
+          </select></div>
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn-submit btn-submit--light">Enviar interesse</button>
+          <button type="submit" class="br-button secondary is-inverted">Enviar interesse</button>
         </div>
-        <div class="form-success form-success--dark" id="form-interesse-success" hidden aria-live="polite">
+        <div class="br-message success" id="form-interesse-success" hidden aria-live="polite">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
           <div>
             <strong>Interesse registrado!</strong>

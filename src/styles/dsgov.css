@@ -1,0 +1,636 @@
+/*
+ * DSGOV — Componentes (padrão mínimo gov.br)
+ * Implementação local dos br-* components sem dependência do pacote npm.
+ * Paleta Blue Warm oficial + tipografia Rawline/Raleway.
+ */
+
+/* =============================================
+   BR-TAG  (seção/categoria/chip)
+   ============================================= */
+.br-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.1875rem 0.625rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 100rem;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  cursor: default;
+  line-height: 1.4;
+}
+
+/* Variante padrão (fundo claro) */
+.br-tag {
+  background: var(--dsgov-blue-10, #DBE8FB);
+  color: var(--dsgov-blue-70, #1351B4);
+  border-color: transparent;
+}
+
+/* Variante sobre fundo escuro */
+.br-tag.is-inverted {
+  background: rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.92);
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* Variante interativa (filtro) */
+.br-tag.is-interactive {
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease, border-color 150ms ease;
+}
+
+.br-tag.is-interactive:hover {
+  background: var(--dsgov-blue-40, #5992ED);
+  color: #fff;
+}
+
+.br-tag.is-interactive.is-active,
+.br-tag.is-interactive[aria-pressed="true"] {
+  background: var(--dsgov-blue-70, #1351B4);
+  color: #fff;
+}
+
+/* =============================================
+   BR-BUTTON
+   ============================================= */
+.br-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 40px;
+  padding: 0 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  border-radius: 100rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: background 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.br-button:focus-visible {
+  outline: 3px solid #FFCD07;
+  outline-offset: 2px;
+}
+
+/* Primary */
+.br-button.primary {
+  background: var(--dsgov-blue-70, #1351B4);
+  color: #fff;
+  border-color: var(--dsgov-blue-70, #1351B4);
+}
+
+.br-button.primary:hover {
+  background: var(--dsgov-blue-60, #2670E8);
+  border-color: var(--dsgov-blue-60, #2670E8);
+}
+
+.br-button.primary:active {
+  background: var(--dsgov-blue-80, #0C326F);
+  border-color: var(--dsgov-blue-80, #0C326F);
+}
+
+/* Secondary */
+.br-button.secondary {
+  background: transparent;
+  color: var(--dsgov-blue-70, #1351B4);
+  border-color: var(--dsgov-blue-70, #1351B4);
+}
+
+.br-button.secondary:hover {
+  background: var(--dsgov-blue-10, #DBE8FB);
+}
+
+/* Secondary sobre fundo escuro */
+.br-button.secondary.is-inverted {
+  color: #fff;
+  border-color: rgba(255,255,255,0.7);
+}
+
+.br-button.secondary.is-inverted:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+/* Tertiary (ghost) */
+.br-button.tertiary {
+  background: transparent;
+  color: var(--dsgov-blue-70, #1351B4);
+  border-color: transparent;
+}
+
+.br-button.tertiary:hover {
+  background: var(--dsgov-blue-10, #DBE8FB);
+}
+
+/* Danger */
+.br-button.danger {
+  background: #E52207;
+  color: #fff;
+  border-color: #E52207;
+}
+
+.br-button.danger:hover {
+  background: #B21D07;
+}
+
+/* On dark background — uses complementary gold/terracotta */
+.br-button.on-dark {
+  background: var(--color-comp, #b27c23);
+  color: var(--color-on-comp, #fff);
+  border-color: var(--color-comp, #b27c23);
+}
+
+.br-button.on-dark:hover {
+  background: var(--color-comp-40, #7f5613);
+  border-color: var(--color-comp-40, #7f5613);
+}
+
+/* Tamanhos */
+.br-button.small {
+  min-height: 32px;
+  padding: 0 1rem;
+  font-size: 0.8125rem;
+}
+
+.br-button.large {
+  min-height: 48px;
+  padding: 0 2rem;
+  font-size: 1rem;
+}
+
+.br-button.block {
+  width: 100%;
+}
+
+.br-button[disabled],
+.br-button.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* =============================================
+   BR-INPUT  (texto, email, tel, number, url, file)
+   ============================================= */
+.br-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+.br-input label {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+}
+
+.br-input label .optional {
+  font-weight: 400;
+  color: #666;
+  font-size: 0.8125rem;
+}
+
+.br-input label .required-mark {
+  color: #E52207;
+  margin-left: 2px;
+}
+
+.br-input input,
+.br-input .input-field {
+  width: 100%;
+  height: 40px;
+  padding: 0 0.875rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: #333;
+  background: #fff;
+  border: 1px solid #888;
+  border-radius: 4px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.br-input input:focus,
+.br-input .input-field:focus {
+  border-color: var(--dsgov-blue-70, #1351B4);
+  box-shadow: 0 0 0 3px rgba(19,81,180,0.15);
+}
+
+.br-input input:invalid:not(:placeholder-shown),
+.br-input input.is-invalid {
+  border-color: #E52207;
+}
+
+.br-input .input-hint {
+  font-size: 0.75rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* File input */
+.br-input input[type="file"] {
+  height: auto;
+  padding: 0.5rem 0.875rem;
+  cursor: pointer;
+}
+
+/* Input sobre fundo escuro */
+.br-input.is-inverted label {
+  color: rgba(255,255,255,0.9);
+}
+
+.br-input.is-inverted input {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.35);
+  color: #fff;
+}
+
+.br-input.is-inverted input::placeholder {
+  color: rgba(255,255,255,0.45);
+}
+
+.br-input.is-inverted input:focus {
+  border-color: rgba(255,255,255,0.8);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.15);
+}
+
+/* =============================================
+   BR-SELECT
+   ============================================= */
+.br-select {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+.br-select label {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+}
+
+.br-select label .optional {
+  font-weight: 400;
+  color: #666;
+  font-size: 0.8125rem;
+}
+
+.br-select .select-wrap {
+  position: relative;
+}
+
+.br-select .select-wrap::after {
+  content: "";
+  position: absolute;
+  right: 0.875rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 6px solid #555;
+  pointer-events: none;
+}
+
+.br-select select {
+  width: 100%;
+  height: 40px;
+  padding: 0 2.5rem 0 0.875rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: #333;
+  background: #fff;
+  border: 1px solid #888;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  outline: none;
+}
+
+.br-select select:focus {
+  border-color: var(--dsgov-blue-70, #1351B4);
+  box-shadow: 0 0 0 3px rgba(19,81,180,0.15);
+}
+
+/* Select sobre fundo escuro */
+.br-select.is-inverted label {
+  color: rgba(255,255,255,0.9);
+}
+
+.br-select.is-inverted select {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.35);
+  color: #fff;
+}
+
+.br-select.is-inverted .select-wrap::after {
+  border-top-color: rgba(255,255,255,0.7);
+}
+
+.br-select.is-inverted select:focus {
+  border-color: rgba(255,255,255,0.8);
+}
+
+/* =============================================
+   BR-TEXTAREA
+   ============================================= */
+.br-textarea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  width: 100%;
+}
+
+.br-textarea label {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #333;
+  line-height: 1.4;
+}
+
+.br-textarea label .optional {
+  font-weight: 400;
+  color: #666;
+  font-size: 0.8125rem;
+}
+
+.br-textarea textarea {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: #333;
+  background: #fff;
+  border: 1px solid #888;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 96px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.br-textarea textarea:focus {
+  border-color: var(--dsgov-blue-70, #1351B4);
+  box-shadow: 0 0 0 3px rgba(19,81,180,0.15);
+}
+
+/* =============================================
+   BR-CHECKBOX
+   ============================================= */
+.br-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  color: #333;
+  line-height: 1.5;
+  user-select: none;
+}
+
+.br-checkbox input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border: 2px solid #888;
+  border-radius: 2px;
+  background: #fff;
+  cursor: pointer;
+  transition: border-color 150ms, background 150ms;
+  margin-top: 2px;
+  position: relative;
+}
+
+.br-checkbox input[type="checkbox"]:checked {
+  background: var(--dsgov-blue-70, #1351B4);
+  border-color: var(--dsgov-blue-70, #1351B4);
+}
+
+.br-checkbox input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 1px;
+  width: 6px;
+  height: 10px;
+  border: 2px solid #fff;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg);
+}
+
+.br-checkbox input[type="checkbox"]:focus-visible {
+  outline: 3px solid #FFCD07;
+  outline-offset: 2px;
+}
+
+/* =============================================
+   BR-CARD
+   ============================================= */
+.br-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  overflow: hidden;
+  transition: box-shadow 200ms ease, border-color 200ms ease;
+}
+
+.br-card:hover {
+  box-shadow: 0 4px 16px rgba(19,81,180,0.1);
+  border-color: var(--dsgov-blue-40, #5992ED);
+}
+
+.br-card.is-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.br-card-header {
+  padding: 1rem 1.25rem 0;
+}
+
+.br-card-content {
+  padding: 1rem 1.25rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.br-card-footer {
+  padding: 0.75rem 1.25rem;
+  border-top: 1px solid #F0F0F0;
+  margin-top: auto;
+}
+
+/* =============================================
+   BR-MODAL
+   ============================================= */
+.br-modal {
+  position: fixed;
+  inset: 0;
+  border: none;
+  border-radius: 8px;
+  padding: 0;
+  max-width: min(720px, calc(100vw - 2rem));
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.25);
+  background: #fff;
+}
+
+.br-modal::backdrop {
+  background: rgba(7,29,65,0.6);
+  backdrop-filter: blur(2px);
+}
+
+.br-modal-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: #fff;
+  border-bottom: 2px solid var(--dsgov-blue-70, #1351B4);
+  gap: 1rem;
+}
+
+.br-modal-header h2,
+.br-modal-header .modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dsgov-blue-90, #071D41);
+  margin: 0;
+  line-height: 1.3;
+}
+
+.br-modal-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #555;
+  transition: background 150ms, color 150ms;
+}
+
+.br-modal-close:hover {
+  background: #F0F0F0;
+  color: #111;
+}
+
+.br-modal-body {
+  padding: 1.5rem;
+}
+
+.br-modal-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  padding: 1rem 1.5rem;
+  background: #F8F8F8;
+  border-top: 1px solid #E5E7EB;
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+/* =============================================
+   BR-MESSAGE  (sucesso / erro / aviso / info)
+   ============================================= */
+.br-message {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  padding: 1rem 1.25rem;
+  border-radius: 4px;
+  border-left: 4px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.br-message.success {
+  background: #E3F5E1;
+  border-left-color: #168821;
+  color: #155116;
+}
+
+.br-message.success i,
+.br-message.success svg { color: #168821; flex-shrink: 0; margin-top: 2px; }
+
+.br-message.danger {
+  background: #FDE8E5;
+  border-left-color: #E52207;
+  color: #6B1100;
+}
+
+.br-message.warning {
+  background: #FFF5C2;
+  border-left-color: #FFCD07;
+  color: #4A3B00;
+}
+
+.br-message.info {
+  background: var(--dsgov-blue-10, #DBE8FB);
+  border-left-color: var(--dsgov-blue-70, #1351B4);
+  color: #062B6B;
+}
+
+/* =============================================
+   BR-FIELDSET
+   ============================================= */
+.br-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.br-fieldset legend {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--dsgov-blue-90, #071D41);
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--dsgov-blue-10, #DBE8FB);
+  width: 100%;
+  margin-bottom: 1.25rem;
+  display: block;
+}
