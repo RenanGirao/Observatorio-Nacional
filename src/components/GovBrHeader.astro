@@ -1,0 +1,578 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+const govbrLogo = `${base}/govbr-logo.png`;
+---
+
+<header class="br-header" id="br-header">
+  <div class="br-container-lg">
+
+    <!-- Topo: logo gov.br + ações do sistema -->
+    <div class="header-top">
+      <div class="header-logo">
+        <a href="https://www.gov.br/pt-br" target="_blank" rel="noopener" aria-label="Portal Gov.br">
+          <img src={govbrLogo} alt="gov.br" height="42" />
+        </a>
+      </div>
+      <div class="header-actions">
+
+        <!-- Dropdown de idioma -->
+        <div class="language-dropdown-container">
+          <button class="br-button secondary small" type="button" id="lang-btn" aria-expanded="false" aria-controls="lang-menu" aria-label="Selecionar idioma">
+            <span id="selected-language">PT-BR</span>
+            <i class="fas fa-caret-down" aria-hidden="true"></i>
+          </button>
+          <div class="br-list br-list-dropdown" id="lang-menu" hidden>
+            <a href="#" class="br-item" data-lang="pt">PT-BR</a>
+            <a href="#" class="br-item" data-lang="en">EN</a>
+            <a href="#" class="br-item" data-lang="es">ES</a>
+          </div>
+        </div>
+
+        <span class="br-divider vertical" aria-hidden="true"></span>
+
+        <!-- Funções do sistema -->
+        <div class="header-functions dropdown">
+          <button class="br-button circle small" type="button" id="sys-btn" aria-expanded="false" aria-controls="sys-menu" aria-label="Funcionalidades do Sistema">
+            <i class="fas fa-th" aria-hidden="true"></i>
+          </button>
+          <div class="br-list" id="sys-menu" hidden>
+            <div class="header">
+              <div class="title">Funcionalidades do Sistema</div>
+            </div>
+            <div class="br-item">
+              <button class="br-button circle small" type="button" id="contrast-btn" aria-label="Alternar alto contraste">
+                <i class="fas fa-adjust" aria-hidden="true"></i>
+                <span>Alto contraste</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Busca -->
+        <div class="header-search-trigger">
+          <button class="br-button circle" type="button" id="search-trigger" aria-label="Abrir busca" aria-expanded="false" aria-controls="main-searchbox">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <!-- Login -->
+        <div class="header-login">
+          <div class="header-sign-in">
+            <button class="br-sign-in small" type="button">
+              <i class="fas fa-user" aria-hidden="true"></i>
+              <span>Entrar</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Base: menu + título + busca -->
+    <div class="header-bottom">
+      <div class="header-menu">
+        <div class="header-menu-trigger">
+          <button class="br-button circle small" type="button" id="nav-btn" aria-label="Menu de navegação" aria-expanded="false" aria-controls="main-navigation">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="header-info">
+          <a href={`${base}/`}>
+            <div class="header-title">Observatório Nacional da Participação Digital</div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Busca expansível -->
+      <div class="header-search" id="main-searchbox" hidden>
+        <div class="br-input has-icon">
+          <label for="searchbox" class="sr-only">Buscar no site</label>
+          <input id="searchbox" type="search" placeholder="O que você procura?" />
+          <button class="br-button circle small" type="submit" aria-label="Pesquisar">
+            <i class="fas fa-search" aria-hidden="true"></i>
+          </button>
+        </div>
+        <button class="br-button circle search-close" type="button" id="search-close" aria-label="Fechar busca">
+          <i class="fas fa-times" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Navegação principal (mobile: dropdown; desktop: inline) -->
+  <nav class="br-header-nav" id="main-navigation" aria-label="Navegação principal" hidden>
+    <div class="br-container-lg">
+      <ul class="br-header-nav-list">
+        <li><a href={`${base}/#sobre`} class="br-item">Sobre</a></li>
+        <li><a href={`${base}/#mapa`} class="br-item">Mapa</a></li>
+        <li><a href={`${base}/#linha-do-tempo`} class="br-item">Linha do tempo</a></li>
+        <li><a href={`${base}/#dados-abertos`} class="br-item">Dados abertos</a></li>
+        <li><a href={`${base}/#pesquisas`} class="br-item">Pesquisas</a></li>
+        <li><a href={`${base}/#parceiros`} class="br-item">Parceiros</a></li>
+        <li><a href={`${base}/explorar-dados`} class="br-item is-cta">Explorar dados</a></li>
+      </ul>
+    </div>
+  </nav>
+
+</header>
+
+<script>
+  // Menu hamburger toggle
+  const navBtn = document.getElementById("nav-btn");
+  const mainNav = document.getElementById("main-navigation");
+  navBtn?.addEventListener("click", () => {
+    const open = !mainNav?.hidden;
+    if (mainNav) mainNav.hidden = open;
+    navBtn.setAttribute("aria-expanded", String(!open));
+    navBtn.querySelector("i")?.classList.toggle("fa-bars", open);
+    navBtn.querySelector("i")?.classList.toggle("fa-times", !open);
+  });
+
+  // Busca toggle
+  const searchTrigger = document.getElementById("search-trigger");
+  const searchBox = document.getElementById("main-searchbox");
+  const searchClose = document.getElementById("search-close");
+  searchTrigger?.addEventListener("click", () => {
+    if (searchBox) searchBox.hidden = false;
+    searchTrigger.setAttribute("aria-expanded", "true");
+    (document.getElementById("searchbox") as HTMLInputElement)?.focus();
+  });
+  searchClose?.addEventListener("click", () => {
+    if (searchBox) searchBox.hidden = true;
+    searchTrigger?.setAttribute("aria-expanded", "false");
+  });
+
+  // Dropdown idioma
+  const langBtn = document.getElementById("lang-btn");
+  const langMenu = document.getElementById("lang-menu");
+  langBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = !langMenu?.hidden;
+    if (langMenu) langMenu.hidden = open;
+    langBtn.setAttribute("aria-expanded", String(!open));
+  });
+
+  // Dropdown sistema
+  const sysBtn = document.getElementById("sys-btn");
+  const sysMenu = document.getElementById("sys-menu");
+  sysBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const open = !sysMenu?.hidden;
+    if (sysMenu) sysMenu.hidden = open;
+    sysBtn.setAttribute("aria-expanded", String(!open));
+  });
+
+  // Fechar dropdowns ao clicar fora
+  document.addEventListener("click", () => {
+    if (langMenu) langMenu.hidden = true;
+    if (sysMenu) sysMenu.hidden = true;
+    langBtn?.setAttribute("aria-expanded", "false");
+    sysBtn?.setAttribute("aria-expanded", "false");
+  });
+
+  // Alto contraste
+  document.getElementById("contrast-btn")?.addEventListener("click", () => {
+    document.documentElement.classList.toggle("high-contrast");
+  });
+
+  // Compact header on scroll — esconde .header-top ao rolar
+  const header = document.getElementById("br-header");
+  const headerTop = header?.querySelector(".header-top") as HTMLElement | null;
+  let lastScroll = 0;
+  let ticking = false;
+
+  function updateHeaderCompact() {
+    const scrolled = window.scrollY > 56;
+    header?.classList.toggle("is-compact", scrolled);
+    ticking = false;
+  }
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      requestAnimationFrame(updateHeaderCompact);
+      ticking = true;
+    }
+  }, { passive: true });
+</script>
+
+<style>
+  /* =============================================
+     DSGOV — Cabeçalho (padrão mínimo gov.br)
+     Paleta: Blue Warm  •  Font: Rawline/Raleway
+     ============================================= */
+
+  .br-header {
+    background: var(--dsgov-blue-90, #071D41);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  /* Barra superior — colapsa ao rolar */
+  .header-top {
+    overflow: hidden;
+    max-height: 64px;
+    transition: max-height 220ms ease, padding 220ms ease, opacity 180ms ease;
+    opacity: 1;
+  }
+
+  .br-header.is-compact .header-top {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Separador da barra superior some junto */
+  .br-header.is-compact .header-top {
+    border-bottom: none;
+  }
+
+  .br-container-lg {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Topo */
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+
+  .header-logo img {
+    height: 42px;
+    width: auto;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  /* Base */
+  .header-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.625rem 0;
+  }
+
+  .header-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .header-title {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.3;
+  }
+
+  .header-info a {
+    text-decoration: none;
+  }
+
+  /* Botões DSGOV */
+  .br-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    border-radius: 100rem;
+    padding: 0.5rem 1rem;
+    transition: background 150ms, color 150ms, box-shadow 150ms;
+    background: transparent;
+    color: #fff;
+  }
+
+  .br-button.circle {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .br-button.circle:hover,
+  .br-button.circle:focus-visible {
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    outline: 2px solid rgba(255,255,255,0.3);
+    outline-offset: 2px;
+  }
+
+  .br-button.secondary {
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 4px;
+    padding: 0.25rem 0.625rem;
+    font-size: 0.8125rem;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .br-button.secondary:hover {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+  }
+
+  .br-button.small {
+    font-size: 0.8125rem;
+    padding: 0.25rem 0.75rem;
+  }
+
+  .br-button.circle.small {
+    width: 32px;
+    height: 32px;
+  }
+
+  /* Sign-in */
+  .br-sign-in {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.375rem 0.875rem;
+    background: #1351B4;
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 100rem;
+    cursor: pointer;
+    transition: background 150ms;
+  }
+
+  .br-sign-in:hover {
+    background: #2670E8;
+  }
+
+  .br-sign-in.small {
+    font-size: 0.8125rem;
+    padding: 0.3125rem 0.75rem;
+  }
+
+  /* Divider vertical */
+  .br-divider.vertical {
+    display: inline-block;
+    width: 1px;
+    height: 24px;
+    background: rgba(255,255,255,0.25);
+    margin: 0 0.25rem;
+  }
+
+  /* Dropdowns */
+  .language-dropdown-container,
+  .header-functions {
+    position: relative;
+  }
+
+  .br-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 160px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    z-index: 300;
+    overflow: hidden;
+  }
+
+  .br-list .header {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    background: #f8f8f8;
+  }
+
+  .br-list .title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .br-item {
+    display: block;
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 100ms;
+  }
+
+  .br-item:hover {
+    background: #f0f4fc;
+    color: #1351B4;
+  }
+
+  .br-list .br-item button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: #333;
+    padding: 0;
+    width: 100%;
+  }
+
+  .br-list .br-item button:hover {
+    color: #1351B4;
+  }
+
+  /* Busca expansível */
+  .header-search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    max-width: 440px;
+  }
+
+  .br-input {
+    position: relative;
+    flex: 1;
+  }
+
+  .br-input input {
+    width: 100%;
+    padding: 0.5rem 2.5rem 0.5rem 0.875rem;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 100rem;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    outline: none;
+    transition: border-color 150ms, background 150ms;
+  }
+
+  .br-input input::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .br-input input:focus {
+    border-color: rgba(255,255,255,0.7);
+    background: rgba(255,255,255,0.15);
+  }
+
+  .br-input.has-icon button {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* Navegação principal */
+  .br-header-nav {
+    background: #0C326F;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .br-header-nav .br-container-lg {
+    padding: 0 1.5rem;
+  }
+
+  .br-header-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .br-header-nav-list .br-item {
+    padding: 0.75rem 1rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+    border-radius: 0;
+    white-space: nowrap;
+    transition: background 150ms, color 150ms;
+  }
+
+  .br-header-nav-list .br-item:hover {
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+  }
+
+  .br-header-nav-list .br-item.is-cta {
+    background: #1351B4;
+    color: #fff;
+    font-weight: 700;
+    margin-left: auto;
+    border-radius: 0;
+  }
+
+  .br-header-nav-list .br-item.is-cta:hover {
+    background: #2670E8;
+  }
+
+  /* === Desktop: mostrar nav inline; esconder hamburger === */
+  @media (min-width: 1025px) {
+    #nav-btn {
+      display: none;
+    }
+    .br-header-nav {
+      display: block !important;
+    }
+    /* Sobrescrever o hidden aplicado pelo JS no desktop */
+  }
+
+  /* === Mobile === */
+  @media (max-width: 1024px) {
+    .header-title {
+      font-size: 0.875rem;
+    }
+    .br-header-nav-list {
+      flex-direction: column;
+    }
+    .br-header-nav-list .br-item.is-cta {
+      margin-left: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .header-title {
+      display: none;
+    }
+    .language-dropdown-container {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  /* No desktop, garantir que a nav fique sempre visível */
+  function applyDesktopNav() {
+    const nav = document.getElementById("main-navigation");
+    if (!nav) return;
+    if (window.innerWidth >= 1025) {
+      nav.hidden = false;
+    }
+  }
+  applyDesktopNav();
+  window.addEventListener("resize", applyDesktopNav);
+</script>

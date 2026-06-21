@@ -1,4 +1,6 @@
 ---
+import '../styles/dsgov.css';
+
 export interface Props {
   title?: string;
   description?: string;
@@ -21,9 +23,12 @@ const {
     <meta property="og:type" content="website" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
+    <!-- Tipografia padrão gov.br: Rawline (fallback Raleway) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Rawline:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Iconografia padrão gov.br: Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Avb2QiuDEEvB4bZJYdft2mNjVShBftLdPG8FJ0V7irTLQ8Uo0qcPxh4Plq7G5tGm0rU+1SPhVotteLpBERwTkw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -34,16 +39,25 @@ const {
 </html>
 
 <style is:global>
-  /* ===== DESIGN TOKENS — fonte única de verdade ===== */
+  /* ===== DESIGN TOKENS — Padrão mínimo gov.br (Blue Warm) ===== */
   :root {
-    /* Monochromatic / Primary (cobalt blue) */
-    --color-primary-95: #d2e0f7;
-    --color-primary-80: #729de5;
-    --color-primary-60: #396bbf;
-    --color-primary: #18499b;
-    --color-primary-40: #163972;
-    --color-primary-20: #0b234c;
-    --color-primary-10: #031026;
+    /* Blue Warm — paleta oficial DSGOV */
+    --dsgov-blue-10:  #DBE8FB;
+    --dsgov-blue-20:  #ADCDFF;
+    --dsgov-blue-40:  #5992ED;
+    --dsgov-blue-60:  #2670E8;  /* vivid-50 */
+    --dsgov-blue-70:  #1351B4;  /* vivid-70 — primary */
+    --dsgov-blue-80:  #0C326F;
+    --dsgov-blue-90:  #071D41;  /* dark — header/footer bg */
+
+    /* Aliases para compatibilidade com componentes existentes */
+    --color-primary-95: #DBE8FB;
+    --color-primary-80: #5992ED;
+    --color-primary-60: #2670E8;
+    --color-primary:    #1351B4;
+    --color-primary-40: #0C326F;
+    --color-primary-20: #071D41;
+    --color-primary-10: #03112A;
 
     /* Complementary (terracotta) */
     --color-comp-95: #f2d6a9;
@@ -92,8 +106,8 @@ const {
     --color-danger: #dc2626;
     --color-info: #18499b;
 
-    /* Typography */
-    --font-sans: "Inter", -apple-system, system-ui, sans-serif;
+    /* Typography — padrão gov.br (Rawline → Raleway → system) */
+    --font-sans: "Rawline", "Raleway", -apple-system, system-ui, sans-serif;
     --font-mono: ui-monospace, "JetBrains Mono", monospace;
 
     --text-display-size: 48px;
